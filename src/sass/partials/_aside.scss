@@ -4,17 +4,19 @@
     text-align: center;
 }
 .quizes-list-section {
-    padding: 1rem   ;
+    height: 50vh;
+    padding: 1rem;
     background-color: colors.$dark-grey;
     border-radius: .4rem;
     border: 2px solid darken(colors.$white, 40);
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
     right: -400px;
     transition: right 200ms ease;
     min-width: 200px;
     &.active {
-        right: 0;
+        right: 10px;
     }
     .quizes-list {
         list-style: none;

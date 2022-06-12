@@ -7,9 +7,14 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-    background-color: colors.$nav;
+    background-color: colors.$transparent-nav;
+    backdrop-filter: blur(5px);
+    position: sticky;
+    top: 0;
+    z-index: 1;
     &__page-title {
-        flex-grow: 1;
+        color: colors.$darker-blue;
+        font-size: 2rem;
     }
     &__quiz-type {
         font-weight: 500;
@@ -19,11 +24,11 @@
         background-color: colors.$nav-btn;
         color: colors.$white;
         font-family: Poppins, sans-serif;
-        padding: 0.4rem 1rem;
-        border-radius: 0.4rem;
+        padding: .4rem 1rem;
+        border-radius: .3rem;
         border: 2px solid colors.$white;
         cursor: pointer;
-        font-size: 1rem;
+        font-size: 1.1rem;
         transition: transform 150ms ease;
         &:active {
             transform: scale(.98);

@@ -8,18 +8,113 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     background-color: colors.$bg;
     font-family: Poppins, sans-serif;
     overflow-x: hidden;
+    min-height: 100vh;
+    &[data-not-interactive="true"] {
+        &::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-color: colors.$transparent-nav;
+        }
+    }
+}
+
+
+
+html::-webkit-scrollbar {
+    width: 20px;
+}
+
+html::-webkit-scrollbar-thumb {
+    border: 5px solid lighten(colors.$bg, 5);
+    background-color: darken(colors.$white, 30);
+    border-radius: 2rem;
+    
+}
+
+html::-webkit-scrollbar-track {
+    background-color: lighten(colors.$bg, 5);
 }
 
 .main-content {
     margin-top: 1rem;
     max-width: 95%;
     margin-inline: auto;
-    // border: 2px solid darken(colors.$white, 10);
     position: relative;
+    color: colors.$white;
+}
+
+.overview-intro {
+    &__title {
+        font-size: clamp(1.8rem, 2vw, 3rem);
+        text-align: center;
+        margin-bottom: 1rem;
+        .app-name {
+            color: colors.$darker-blue;
+        }
+    }
+    &__desc {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+}
+
+.available-quizzes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    gap: 1.4rem;
+    margin-top: 2rem;
+    max-width: 95%;
+    margin-inline: auto;
+    .quiz-figure {
+        border: 2px solid darken(colors.$white, 20);
+        padding: 1rem;
+        border-radius: .4rem;
+        background-color: darken(colors.$nav, 2);
+        transition: background-color 200ms;
+        &:hover {
+            background-color:  lighten(colors.$nav, 5);
+
+        }
+        &__language-icon {
+            font-size: 2rem;
+            &_html {
+                color: colors.$orange-clr;
+
+            }
+            &_css {
+                color: colors.$blue-clr;
+            }
+            &_js {
+                color: colors.$yellow-clr;
+            }
+            &_sass {
+                color: colors.$pink-clr
+            }
+        }
+        &__quiz-name {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        &__about-quiz {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            color: darken(colors.$white, 5)
+        }
+    }
+    @media (max-width: 1400px) {
+        & {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+    }
 }
 
 .quiz-name {
@@ -38,6 +133,24 @@ body {
     &__question {
         color: colors.$white;
         text-align: center;
+    }
+    &__give-answer-btn {
+        display: block;
+        margin-inline: auto;
+        border: none;
+        background-color: colors.$nav;
+        padding: .4rem 1.2rem;
+        color: colors.$white;
+        font-family: Poppins, sans-serif;
+        font-size: 1.2rem;
+        border-radius: .4rem;
+        margin-top: 1.5rem;
+        cursor: pointer;
+        border: 2px solid darken(colors.$white, 20);
+        transition: background-color 200ms;
+        &:hover {
+            background-color: lighten(colors.$nav, 10);
+        }
     }
 }
 .answers-list {
