@@ -1,0 +1,54 @@
+@use 'colors';
+.quizes-type-title {
+    color: #fff;
+    text-align: center;
+}
+.quizes-list-section {
+    padding: 1rem   ;
+    background-color: colors.$dark-grey;
+    border-radius: .4rem;
+    border: 2px solid darken(colors.$white, 40);
+    position: absolute;
+    top: 0;
+    right: -400px;
+    transition: right 200ms ease;
+    min-width: 200px;
+    &.active {
+        right: 0;
+    }
+    .quizes-list {
+        list-style: none;
+        &__item {
+            background-color: colors.$nav;
+            margin-top: 1rem;
+            border-radius: .3rem;
+            transition: background-color 200ms ease ;
+            &:hover {
+                background-color: lighten(colors.$nav, 10);
+            }
+        }
+        &__link {
+            display: block;
+            padding: .5rem 1rem;
+            color: colors.$white;
+            text-decoration: none;
+            text-align: center;
+        }
+    }
+}
+
+.sass-language {
+    color: colors.$pink-clr;
+}
+
+.javascript-language {
+    color: colors.$yellow-clr;
+}
+
+.css-language {
+    color: colors.$blue-clr;
+}
+
+.html-language {
+    color: colors.$orange-clr;
+}

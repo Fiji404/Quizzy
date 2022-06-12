@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/index.dda6fa14.css">
+    <script defer="" src="/index.a56319bd.js">module;
+
+</script>
     <title>Quiz App</title>
 </head>
 <body>
@@ -12,29 +15,50 @@
         <header>
             <h1 class="nav__page-title">Quizzes</h1>
         </header>
-        <h2 class="nav__quiz-type">HTML Quizz knowledge</h2>
         <button class="nav__change-quiz-btn">Choose Quiz</button>
     </nav>
     <main class="main-content">
+        <h2 class="quiz-name"><span class="html-language">HTML</span> language knowledge</h2>
         <section class="quiz-interface">
             <header>
-                <h2 class="quiz-interface__question"></h2>
+                <h2 class="quiz-interface__question">How many <code>h1</code> elements you can use on website</h2>
             </header>
-            <ul class="quiz-interface__answers-list">
-                <li>
-                    <input type="checkbox">
-                    <label for=""></label>
+            <ul class="answers-list">
+                <li class="answers-list__item">
+                    <input class="answers-list__input" id="first-answer" name="quiz-answer" type="radio">
+                    <label class="answers-list__label" for="first-answer">Two elements</label>
+                </li>
+                <li class="answers-list__item">
+                    <input class="answers-list__input" id="second-answer" name="quiz-answer" type="radio">
+                    <label class="answers-list__label" for="second-answer">Three elements</label>
+                </li>
+                <li class="answers-list__item">
+                    <input class="answers-list__input" id="third-answer" name="quiz-answer" type="radio">
+                    <label class="answers-list__label" for="third-answer">One element</label>
+                </li>
+                <li class="answers-list__item">
+                    <input class="answers-list__input" id="fourth-answer" name="quiz-answer" type="radio">
+                    <label class="answers-list__label" for="fourth-answer">There is no limit</label>
                 </li>
             </ul>
         </section>
-        <aside class="main-content__quizes-section">
-            <ul class="quiz-list">
-                <li class="quiz-list__item">HTML Quiz</li>
-                <li class="quiz-list__item">CSS Quiz</li>
-                <li class="quiz-list__item">JavaScript Quiz</li>
-                <li class="quiz-list__item">SASS Quiz</li>
+        <aside class="quizes-list-section">
+            <h2 class="quizes-type-title">Programming quizes</h2>
+            <ul class="quizes-list">
+                <li class="quizes-list__item">
+                    <a class="quizes-list__link" href="#"><span class="html-language">HTML</span> Quiz</a>
+                </li>
+                <li class="quizes-list__item">
+                    <a class="quizes-list__link" href="#"><span class="css-language">CSS</span> Quiz</a>
+                </li>
+                <li class="quizes-list__item">
+                    <a class="quizes-list__link" href="#"><span class="javascript-language">JavaScript</span> Quiz</a>
+                </li>
+                <li class="quizes-list__item">
+                    <a class="quizes-list__link" href="#"><span class="sass-language">SASS</span> Quiz</a>
+                </li>
             </ul>
         </aside>
     </main>
-<script src="/pages.0155c232.js"></script></body>
+</body>
 </html>

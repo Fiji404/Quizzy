@@ -5,6 +5,8 @@
     color: colors.$white;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
     background-color: colors.$nav;
     &__page-title {
         flex-grow: 1;

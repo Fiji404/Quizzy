@@ -2,8 +2,10 @@
 .nav {
   color: #ebebeb;
   background-color: #424242;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
   padding: 1rem 2rem;
   display: flex;
 }
@@ -32,6 +34,66 @@
   transform: scale(.98);
 }
 
+.quizes-type-title {
+  color: #fff;
+  text-align: center;
+}
+
+.quizes-list-section {
+  min-width: 200px;
+  background-color: #2c2c2c;
+  border: 2px solid #858585;
+  border-radius: .4rem;
+  padding: 1rem;
+  transition: right .2s;
+  position: absolute;
+  top: 0;
+  right: -400px;
+}
+
+.quizes-list-section.active {
+  right: 0;
+}
+
+.quizes-list-section .quizes-list {
+  list-style: none;
+}
+
+.quizes-list-section .quizes-list__item {
+  background-color: #424242;
+  border-radius: .3rem;
+  margin-top: 1rem;
+  transition: background-color .2s;
+}
+
+.quizes-list-section .quizes-list__item:hover {
+  background-color: #5c5c5c;
+}
+
+.quizes-list-section .quizes-list__link {
+  color: #ebebeb;
+  text-align: center;
+  padding: .5rem 1rem;
+  text-decoration: none;
+  display: block;
+}
+
+.sass-language {
+  color: #cd6799;
+}
+
+.javascript-language {
+  color: #efd81d;
+}
+
+.css-language {
+  color: #30b1eb;
+}
+
+.html-language {
+  color: #e54c21;
+}
+
 *, :before, :after {
   box-sizing: border-box;
   margin: 0;
@@ -41,14 +103,73 @@
 body {
   background-color: #212121;
   font-family: Poppins, sans-serif;
+  overflow-x: hidden;
 }
 
 .main-content {
-  max-width: 90%;
+  max-width: 95%;
   margin-top: 1rem;
-  border: 2px solid #d2d2d2;
   margin-inline: auto;
   position: relative;
+}
+
+.quiz-name {
+  text-align: center;
+  color: #ebebeb;
+}
+
+.quiz-interface {
+  width: min(90%, 450px);
+  margin-inline: auto;
+  background-color: #2c2c2c;
+  border: 2px solid #858585;
+  border-radius: .4rem;
+  margin-top: 2rem;
+  padding: 1.5rem .75rem;
+}
+
+.quiz-interface__question {
+  color: #ebebeb;
+  text-align: center;
+}
+
+.answers-list {
+  max-width: fit-content;
+  margin-top: 1rem;
+  margin-inline: auto;
+  list-style: none;
+}
+
+.answers-list__item {
+  align-items: center;
+  gap: 15px;
+  margin-top: 1rem;
+  display: flex;
+}
+
+.answers-list__input {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  border: 2px solid #d2d2d2;
+  border-radius: 50%;
+}
+
+.answers-list__input:checked {
+  background-color: #0fa;
+  box-shadow: inset 0 0 0 4px #2c2c2c;
+}
+
+.answers-list__input:checked + .answers-list__label {
+  color: #0fa;
+}
+
+.answers-list__label {
+  color: #096;
+  text-align: center;
+  font-size: 1.2rem;
+  transition: color .2s;
 }
 
 /*# sourceMappingURL=index.dda6fa14.css.map */
