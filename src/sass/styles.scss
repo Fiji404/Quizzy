@@ -24,8 +24,6 @@ body {
     }
 }
 
-
-
 html::-webkit-scrollbar {
     width: 20px;
 }
@@ -47,6 +45,7 @@ html::-webkit-scrollbar-track {
     margin-inline: auto;
     position: relative;
     color: colors.$white;
+    display: flex;
 }
 
 .overview-intro {
@@ -77,31 +76,29 @@ html::-webkit-scrollbar-track {
         border-radius: .4rem;
         background-color: darken(colors.$nav, 2);
         transition: background-color 200ms;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        &__quiz-type {
+            margin-top: 1rem;
+            &_programming {
+                color: colors.$lime-green;
+            }
+            &_world {
+                color: colors.$green;
+            }
+        }
         &:hover {
             background-color:  lighten(colors.$nav, 5);
-
         }
         &__language-icon {
             font-size: 2rem;
-            &_html {
-                color: colors.$orange-clr;
-
-            }
-            &_css {
-                color: colors.$blue-clr;
-            }
-            &_js {
-                color: colors.$yellow-clr;
-            }
-            &_sass {
-                color: colors.$pink-clr
-            }
         }
         &__quiz-name {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
+            gap: .5rem;
         }
         &__about-quiz {
             margin-top: 1rem;

@@ -4,19 +4,18 @@
     text-align: center;
 }
 .quizes-list-section {
-    height: 50vh;
+    width: 0;
+    height: 80vh;
     padding: 1rem;
     background-color: colors.$dark-grey;
     border-radius: .4rem;
     border: 2px solid darken(colors.$white, 40);
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    right: -400px;
-    transition: right 200ms ease;
-    min-width: 200px;
+    transform: translateX(400px);
+    transition: transform 200ms;
     &.active {
-        right: 10px;
+        width: 45%;
+        transform: translateX(0);
+
     }
     .quizes-list {
         list-style: none;
@@ -53,4 +52,8 @@
 
 .html-language {
     color: colors.$orange-clr;
+}
+
+.people-color {
+    color: colors.$green
 }
