@@ -1,9 +1,10 @@
 @use 'partials/navigation';
 @use 'partials/colors';
-@use 'partials/aside';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -14,12 +15,21 @@ body {
     font-family: Poppins, sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
-    &[data-not-interactive="true"] {
+    &.not-interactive {
+        .nav__back-from-quizes {
+            top: 1rem;
+        }
+        .available-quizzes-grid .quiz-figure {
+            z-index: 4;
+            cursor: pointer;
+        }
         &::before {
             content: '';
             position: fixed;
             inset: 0;
-            background-color: colors.$transparent-nav;
+            z-index: 2;
+            background-color: colors.$transparent-black;
+            user-select: none;
         }
     }
 }
@@ -32,7 +42,6 @@ html::-webkit-scrollbar-thumb {
     border: 5px solid lighten(colors.$bg, 5);
     background-color: darken(colors.$white, 30);
     border-radius: 2rem;
-    
 }
 
 html::-webkit-scrollbar-track {
@@ -73,12 +82,21 @@ html::-webkit-scrollbar-track {
     .quiz-figure {
         border: 2px solid darken(colors.$white, 20);
         padding: 1rem;
-        border-radius: .4rem;
+        border-radius: 0.4rem;
         background-color: darken(colors.$nav, 2);
         transition: background-color 200ms;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        animation: originate 1s var(--delay) forwards;
+        opacity: 0;
+        transform: scale(0.96);
+        @keyframes originate {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
         &__quiz-type {
             margin-top: 1rem;
             &_programming {
@@ -89,22 +107,40 @@ html::-webkit-scrollbar-track {
             }
         }
         &:hover {
-            background-color:  lighten(colors.$nav, 5);
+            background-color: lighten(colors.$nav, 5);
         }
-        &__language-icon {
+        &__quiz-icon {
             font-size: 2rem;
+            &_css {
+                color: colors.$blue-clr;
+            }
+            &_js {
+                color: colors.$yellow-clr;
+            }
+            &_html {
+                color: colors.$orange-clr;
+            }
+            &_sass {
+                color: colors.$pink-clr;
+            }
+            &_flag {
+                color: colors.$transparent-red;
+            }
+            &_population {
+                color: colors.$light-grey;
+            }
         }
         &__quiz-name {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: .5rem;
+            gap: 0.5rem;
         }
         &__about-quiz {
             margin-top: 1rem;
             text-align: center;
             font-size: 1.5rem;
-            color: darken(colors.$white, 5)
+            color: darken(colors.$white, 5);
         }
     }
     @media (max-width: 1400px) {
@@ -122,10 +158,10 @@ html::-webkit-scrollbar-track {
 .quiz-interface {
     width: min(90%, 450px);
     border: 2px solid darken(colors.$white, 40);
-    padding: 1.5rem .75rem;
+    padding: 1.5rem 0.75rem;
     margin-inline: auto;
     margin-top: 2rem;
-    border-radius: .4rem;
+    border-radius: 0.4rem;
     background-color: colors.$dark-grey;
     &__question {
         color: colors.$white;
@@ -136,11 +172,11 @@ html::-webkit-scrollbar-track {
         margin-inline: auto;
         border: none;
         background-color: colors.$nav;
-        padding: .4rem 1.2rem;
+        padding: 0.4rem 1.2rem;
         color: colors.$white;
         font-family: Poppins, sans-serif;
         font-size: 1.2rem;
-        border-radius: .4rem;
+        border-radius: 0.4rem;
         margin-top: 1.5rem;
         cursor: pointer;
         border: 2px solid darken(colors.$white, 20);
@@ -173,7 +209,7 @@ html::-webkit-scrollbar-track {
             box-shadow: inset 0 0 0 4px colors.$dark-grey;
         }
         &:checked + .answers-list__label {
-            color: colors.$lime-green
+            color: colors.$lime-green;
         }
     }
     &__label {
@@ -183,4 +219,3 @@ html::-webkit-scrollbar-track {
         text-align: center;
     }
 }
-

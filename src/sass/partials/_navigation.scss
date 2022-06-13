@@ -12,6 +12,26 @@
     position: sticky;
     top: 0;
     z-index: 1;
+    &__back-from-quizes {
+        position: fixed;
+        top: -3rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+        width: 3rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 2px solid colors.$dark-grey;
+        font-size: 1.4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: top 200ms;
+        &:active {
+            transform: translateX(-50%) scale(.98);
+        }
+    }
     &__page-title {
         color: colors.$darker-blue;
         font-size: 2rem;
