@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../sass/quiz.scss">
+    <script defer type="module" src="../scripts/quiz.js">module;</script>
+    <title>HTML Quiz</title>
+</head>
+<body>
+    <nav class="nav">
+        <header>
+            <h1 class="nav__page-title">Quizzy</h1>
+        </header>
+        <a href="/" class="nav__change-quiz-btn">Back to Quizes</a>
+    </nav>
+    <main class="quiz-container">
+        <header class="intro-section">
+            <h2 class="intro-section__title">You choose the HTML Quiz !</h2>
+            <p class="intro-section__desc">Click button below to begin</p>
+            <button class="intro-section__btn">Start quiz</button>
+        </header>
+        <section class="quiz-interface hidden">
+            <header>
+                <h2 class="quiz-interface__question">How many <code>h1</code> elements you can use on website</h2>
+            </header>
+            <ul class="answers-list">
+                <li class="answers-list__item">
+                    <input class="answers-list__input" id="first-answer" name="quiz-answer" type="radio" />
+                    <label aria-label="Answer 1 to question" class="answers-list__label" for="first-answer"></label>
+                </li>
+                <li class="answers-list__item">
+                    <input class="answers-list__input" id="second-answer" name="quiz-answer" type="radio" />
+                    <label aria-label="Answer 2 to question" class="answers-list__label" for="second-answer"></label>
+                </li>
+                <li class="answers-list__item">
+                    <input class="answers-list__input" id="third-answer" name="quiz-answer" type="radio" />
+                    <label aria-label="Answer 3 to question" class="answers-list__label" for="third-answer"></label>
+                </li>
+                <li class="answers-list__item">
+                    <input class="answers-list__input" id="fourth-answer" name="quiz-answer" type="radio" />
+                    <label aria-label="Answer 4 to question" class="answers-list__label" for="fourth-answer"></label>
+                </li>
+            </ul>
+            <button class="quiz-interface__give-answer-btn" type="button">Give answer</button>
+        </section>
+    </main>
+</body>
+</html>

@@ -12,6 +12,9 @@
         <title>Quizzy</title>
     </head>
     <body>
+        <div aria-label="Information about redirecting to chosen quiz" class="redirect-notification">
+            <h2 class="redirect-notification__title">Redirecting ...</h2>
+        </div>
         <button aria-label="back from quizzes button" class="nav__back-from-quizes">
             <i class="fa-solid fa-xmark"></i>
         </button>
@@ -22,7 +25,7 @@
             <button class="nav__change-quiz-btn">Choose Quiz</button>
         </nav>
         <main class="main-content">
-            <section class="overview-intro">
+            <article class="overview-intro">
                 <header>
                     <h2 class="overview-intro__title">
                         Welcome in the <span class="app-name">Quizzy</span>, app created to improve knowledge of any
@@ -31,7 +34,7 @@
                     <p class="overview-intro__desc">Available quizzes you can see below:</p>
                 </header>
                 <section class="available-quizzes-grid">
-                    <figure style="--delay: 100ms" class="quiz-figure quiz-figure_html">
+                    <figure data-quiz-name="HTMLQuiz" style="--delay: 100ms" class="quiz-figure quiz-figure_html">
                         <h2 class="quiz-figure__quiz-name">
                             <span class="quiz-figure__quiz-icon quiz-figure__quiz-icon_html"
                                 ><i class="fa-brands fa-html5"></i
@@ -46,7 +49,7 @@
                             <i class="fa-solid fa-code"></i> Programming Topic
                         </figcaption>
                     </figure>
-                    <figure style="--delay: 200ms" class="quiz-figure">
+                    <figure data-quiz-name="CSS-Quiz" style="--delay: 200ms" class="quiz-figure">
                         <h2 class="quiz-figure__quiz-name">
                             <span class="quiz-figure__quiz-icon quiz-figure__quiz-icon_css"
                                 ><i class="fa-brands fa-css3"></i></span
@@ -107,43 +110,20 @@
                     <figure style="--delay: 500ms" class="quiz-figure">
                         <h2 class="quiz-figure__quiz-name">
                             <span class="quiz-figure__quiz-icon quiz-figure__quiz-icon_flag"
-                                ><i class="fa-solid fa-flag"></i></span>
+                                ><i class="fa-solid fa-flag"></i
+                            ></span>
                             Flags Quiz
                         </h2>
                         <p class="quiz-figure__about-quiz">
-                            In this quiz you will try to solve the names of countries by their flag ! You will answer almost 3000 thousand possible flags in the world
+                            In this quiz you will try to solve the names of countries by their flag ! You will answer
+                            almost 3000 thousand possible flags in the world
                         </p>
                         <figcaption class="quiz-figure__quiz-type quiz-figure__quiz-type_world">
                             <i class="fa-solid fa-earth-americas"></i> World knowledge
                         </figcaption>
                     </figure>
                 </section>
-            </section>
-            <!-- <h2 class="quiz-name"><span class="html-language">HTML</span> language knowledge</h2>
-        <section class="quiz-interface">
-            <header>
-                <h2 class="quiz-interface__question">How many <code>h1</code> elements you can use on website</h2>
-            </header>
-            <ul class="answers-list">
-                <li class="answers-list__item">
-                    <input class="answers-list__input" id="first-answer" name="quiz-answer" type="radio">
-                    <label class="answers-list__label" for="first-answer">Two elements</label>
-                </li>
-                <li class="answers-list__item">
-                    <input class="answers-list__input" id="second-answer" name="quiz-answer" type="radio">
-                    <label class="answers-list__label" for="second-answer">Three elements</label>
-                </li>
-                <li class="answers-list__item">
-                    <input class="answers-list__input" id="third-answer" name="quiz-answer" type="radio">
-                    <label class="answers-list__label" for="third-answer">One element</label>
-                </li>
-                <li class="answers-list__item">
-                    <input class="answers-list__input" id="fourth-answer" name="quiz-answer" type="radio">
-                    <label class="answers-list__label" for="fourth-answer">There is no limit</label>
-                </li>
-            </ul>
-            <button class="quiz-interface__give-answer-btn" type="button">Give answer</button>
-        </section> -->
+            </article>
         </main>
     </body>
 </html>

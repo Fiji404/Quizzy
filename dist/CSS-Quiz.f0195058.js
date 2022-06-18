@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"dOzAP":[function(require,module,exports) {
+})({"3OFFe":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "cf6eb48aa56319bd";
+module.bundle.HMR_BUNDLE_ID = "fb4b5318f0195058";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, importScripts */ /*::
 import type {
   HMRAsset,
@@ -502,34 +502,8 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"bAabt":[function(require,module,exports) {
-const expandQuizzesListBtn = document.querySelector(".nav__change-quiz-btn");
-const backFromQuizesBtn = document.querySelector(".nav__back-from-quizes");
-const quizesContainer = document.querySelector(".available-quizzes-grid");
-const quizesSections = document.querySelectorAll(".quiz-figure");
-const redirectNotyfication = document.querySelector(".redirect-notification");
-const bodyElement = document.body;
-expandQuizzesListBtn.addEventListener("click", ()=>{
-    bodyElement.classList.add("not-interactive");
-    quizesContainer.scrollIntoView({
-        behavior: "smooth"
-    });
-});
-backFromQuizesBtn.addEventListener("click", ()=>{
-    bodyElement.classList.remove("not-interactive");
-});
-quizesSections.forEach((el)=>{
-    el.addEventListener("click", (e)=>{
-        if (bodyElement.classList.contains("not-interactive")) {
-            const targetQuizName = e.target.dataset.quizName;
-            redirectNotyfication.classList.add("active");
-            setTimeout(()=>{
-                window.location.replace(`${window.location.href}${targetQuizName}.html`);
-            }, 3000);
-        }
-    });
-});
+},{}],"029vw":[function(require,module,exports) {
 
-},{}]},["dOzAP","bAabt"], "bAabt", "parcelRequiree238")
+},{}]},["3OFFe","029vw"], "029vw", "parcelRequiree238")
 
-//# sourceMappingURL=index.a56319bd.js.map
+//# sourceMappingURL=CSS-Quiz.f0195058.js.map

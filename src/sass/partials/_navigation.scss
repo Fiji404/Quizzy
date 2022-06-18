@@ -40,6 +40,7 @@
         font-weight: 500;
     }
     &__change-quiz-btn {
+        text-decoration: none;
         border: none;
         background-color: colors.$nav-btn;
         color: colors.$white;

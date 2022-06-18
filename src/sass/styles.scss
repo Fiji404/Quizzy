@@ -10,6 +10,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-padding-top: 5rem;
+}
+
 body {
     background-color: colors.$bg;
     font-family: Poppins, sans-serif;
@@ -22,6 +26,9 @@ body {
         .available-quizzes-grid .quiz-figure {
             z-index: 4;
             cursor: pointer;
+            & > * {
+                pointer-events: none;
+            }
         }
         &::before {
             content: '';
@@ -52,9 +59,7 @@ html::-webkit-scrollbar-track {
     margin-top: 1rem;
     max-width: 95%;
     margin-inline: auto;
-    position: relative;
     color: colors.$white;
-    display: flex;
 }
 
 .overview-intro {
@@ -155,67 +160,27 @@ html::-webkit-scrollbar-track {
     color: colors.$white;
 }
 
-.quiz-interface {
-    width: min(90%, 450px);
-    border: 2px solid darken(colors.$white, 40);
-    padding: 1.5rem 0.75rem;
-    margin-inline: auto;
-    margin-top: 2rem;
-    border-radius: 0.4rem;
-    background-color: colors.$dark-grey;
-    &__question {
-        color: colors.$white;
-        text-align: center;
-    }
-    &__give-answer-btn {
-        display: block;
-        margin-inline: auto;
-        border: none;
-        background-color: colors.$nav;
-        padding: 0.4rem 1.2rem;
-        color: colors.$white;
-        font-family: Poppins, sans-serif;
-        font-size: 1.2rem;
-        border-radius: 0.4rem;
-        margin-top: 1.5rem;
-        cursor: pointer;
-        border: 2px solid darken(colors.$white, 20);
-        transition: background-color 200ms;
-        &:hover {
-            background-color: lighten(colors.$nav, 10);
-        }
-    }
+.quiz-html {
+    display: none;
 }
-.answers-list {
-    max-width: fit-content;
-    margin-top: 1rem;
-    list-style: none;
-    margin-inline: auto;
-    &__item {
-        margin-top: 1rem;
-        display: flex;
-        gap: 15px;
-        align-items: center;
-    }
-    &__input {
-        appearance: none;
-        width: 25px;
-        height: 25px;
-        border: 2px solid darken(colors.$white, 10);
-        border-radius: 50%;
-        cursor: pointer;
-        &:checked {
-            background-color: colors.$lime-green;
-            box-shadow: inset 0 0 0 4px colors.$dark-grey;
-        }
-        &:checked + .answers-list__label {
-            color: colors.$lime-green;
-        }
-    }
-    &__label {
-        transition: color 200ms ease;
-        color: darken(colors.$lime-green, 20);
-        font-size: 1.2rem;
-        text-align: center;
+
+.redirect-notification {
+    position: fixed;
+    top: -5rem;
+    left: 50%;
+    z-index: 6;
+    transform: translateX(-50%);
+    border: 2px solid colors.$bg;
+    background-color: colors.$white;
+    color: colors.$nav-btn;
+    padding-block: .5rem;
+    width: min(90%, 400px);
+    text-align: center;
+    border-radius: .4rem;
+    font-weight: 700;
+    font-size: clamp(1rem, 1.4vw, 1.3rem);
+    transition: top 200ms;
+    &.active {
+        top: 1rem;
     }
 }
