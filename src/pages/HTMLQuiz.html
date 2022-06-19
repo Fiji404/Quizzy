@@ -21,29 +21,35 @@
             <p class="intro-section__desc">Click button below to begin</p>
             <button class="intro-section__btn">Start quiz</button>
         </header>
-        <section class="quiz-interface hidden">
+        <section class="quiz-interface">
             <header>
-                <h2 class="quiz-interface__question">How many <code>h1</code> elements you can use on website</h2>
+                <p class="quiz-interface__question-number">Question <output>1</output> of 10 questions</p>
+                <h2 aria-label="question to answer" class="quiz-interface__question"></h2>
             </header>
             <ul class="answers-list">
                 <li class="answers-list__item">
+                    <p class="answers-list__question-number">a:</p>
                     <input class="answers-list__input" id="first-answer" name="quiz-answer" type="radio" />
                     <label aria-label="Answer 1 to question" class="answers-list__label" for="first-answer"></label>
                 </li>
                 <li class="answers-list__item">
+                    <p class="answers-list__question-number">b:</p>
                     <input class="answers-list__input" id="second-answer" name="quiz-answer" type="radio" />
                     <label aria-label="Answer 2 to question" class="answers-list__label" for="second-answer"></label>
                 </li>
                 <li class="answers-list__item">
+                    <p class="answers-list__question-number">c:</p>
                     <input class="answers-list__input" id="third-answer" name="quiz-answer" type="radio" />
                     <label aria-label="Answer 3 to question" class="answers-list__label" for="third-answer"></label>
                 </li>
                 <li class="answers-list__item">
+                    <p class="answers-list__question-number">d:</p>
                     <input class="answers-list__input" id="fourth-answer" name="quiz-answer" type="radio" />
                     <label aria-label="Answer 4 to question" class="answers-list__label" for="fourth-answer"></label>
                 </li>
             </ul>
-            <button class="quiz-interface__give-answer-btn" type="button">Give answer</button>
+            <p aria-label="Notyfication about blank provided answer" class="quiz-interface__error"></p>
+            <button class="quiz-interface__give-answer-btn" type="button">Next question</button>
         </section>
     </main>
 </body>

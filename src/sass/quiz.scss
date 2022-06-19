@@ -53,8 +53,13 @@ body {
                 background-color: transparent;
                 border: 5px solid gray;
                 border-top-color: transparent;
-                animation: loading 1s ease infinite;
+                animation: rotating 1s ease infinite;
                 cursor: default;
+                @keyframes rotating {
+                    to {
+                        transform: rotate(1turn);
+                    }
+                }
                 &:hover {
                     background-color: transparent;
                 }
@@ -62,25 +67,58 @@ body {
             &:hover {
                 background-color: lighten(colors.$nav, 30);
             }
-            @keyframes loading {
-                to {
-                    transform: rotate(1turn);
-                }
-            }
-            
         }
     }
 }
 
 .quiz-interface {
-    width: min(90%, 450px);
+    width: min(90%, 650px);
     border: 2px solid darken(colors.$white, 40);
-    padding: 1.5rem 0.75rem;
+    padding: 2rem 1rem;
     margin-inline: auto;
     margin-top: 2rem;
     border-radius: 0.4rem;
     background-color: colors.$dark-grey;
     transition: 200ms ease;
+    position: relative;
+    &__error.active {
+        text-align: center;
+        margin-top: 1rem;
+        color: darken(colors.$white, 10);
+        border: 3px solid #000;
+        font-size: 1.2rem;
+        background-color: colors.$light-red;
+        width: min(90%, 350px);
+        margin-inline: auto;
+        padding: .5rem 0;
+        border-radius: .4rem;
+    }
+    &.active {
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: colors.$transparent-grey;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 5px solid colors.$darker-blue;
+            border-top: 5px solid transparent;
+            border-radius: 50%;
+            animation: loading 1s ease-in-out infinite;
+        }
+        @keyframes loading {
+            to {
+                transform: translate(-50%, -50%) rotate(1turn);
+            }
+        }
+    }
     &.hidden {
         opacity: 0;
         user-select: none;
@@ -89,6 +127,20 @@ body {
     &__question {
         color: colors.$white;
         text-align: center;
+    }
+    &__question-number {
+        color: darken(colors.$white, 20);
+        text-align: center;
+        font-size: 1.1rem;
+        margin-bottom: .7rem;
+        output {
+            display: inline-block;
+            width: 30px;
+            background-color: colors.$nav;
+            border-radius: .2rem;
+            border: 2px solid darken(colors.$white, 30);
+            color: colors.$white;
+        }
     }
     &__give-answer-btn {
         display: block;
@@ -111,35 +163,38 @@ body {
 }
 
 .answers-list {
-    max-width: fit-content;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     list-style: none;
-    margin-inline: auto;
+    &__question-number {
+        text-transform: uppercase;
+        color: colors.$light-grey;
+        font-size: 1.5rem
+    }
     &__item {
         margin-top: 1rem;
         display: flex;
-        gap: 15px;
         align-items: center;
+        gap: 15px;
     }
     &__input {
         appearance: none;
         width: 25px;
         height: 25px;
         aspect-ratio: 1 / 1;
-        border: 2px solid darken(colors.$white, 10);
+        border: 2px solid darken(colors.$white, 15);
         border-radius: 50%;
         cursor: pointer;
         &:checked {
-            background-color: colors.$lime-green;
+            background-color: colors.$white;
             box-shadow: inset 0 0 0 4px colors.$dark-grey;
         }
         &:checked + .answers-list__label {
-            color: colors.$lime-green;
+            color: lighten(colors.$blue-clr, 10);
         }
     }
     &__label {
         transition: color 200ms ease;
-        color: darken(colors.$lime-green, 20);
+        color: darken(colors.$blue-clr, 15);
         font-size: 1.2rem;
         text-align: center;
     }

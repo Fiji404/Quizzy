@@ -522,26 +522,53 @@ const introSection = document.querySelector(".intro-section");
 const quizInterface = document.querySelector(".quiz-interface");
 const quizInterfaceQuestion = document.querySelector(".quiz-interface__question");
 const answersList = document.querySelectorAll(".answers-list__label");
-const fetchQuestionFromDB = ()=>{
-    const getRandomQuestionId = Math.trunc(Math.random() * 4);
+const nextQuestionBtn = document.querySelector(".quiz-interface__give-answer-btn");
+const inputAnswersElements = [
+    ...document.querySelectorAll(".answers-list__input")
+];
+const numberOfQuestion = document.querySelector(".quiz-interface__question-number > output");
+const incorrectFilledAnswer = document.querySelector(".quiz-interface__error");
+let currentQuestionNumber = 1;
+let correctAnswersCounter = 0;
+let questionId = 0;
+const fetchRandomQuestionFromDB = ()=>{
+    const getRandomQuestionId = Math.trunc(Math.random() * 4) + 1;
+    questionId = getRandomQuestionId;
     (0, _database.get)((0, _database.child)(dbRef, `Quizes/HTML/Questions/Question${getRandomQuestionId}`)).then((snapshot)=>{
-        if (snapshot.exists()) {
-            quizInterfaceQuestion.textContent = snapshot.val();
-            console.log(snapshot.val());
-        } else console.log("No data available");
+        if (snapshot.exists()) quizInterfaceQuestion.textContent = snapshot.val();
     });
-    return getRandomQuestionId;
 };
 const fetchAvailableAnswersFromDB = ()=>{
-    const currentIdQuestion = fetchQuestionFromDB();
-    (0, _database.get)((0, _database.child)(dbRef, `Quizes/HTML/Answers/Question${currentIdQuestion}Answers`)).then((snapshot)=>{
+    (0, _database.get)((0, _database.child)(dbRef, `Quizes/HTML/Answers/Question${questionId}Answers`)).then((snapshot)=>{
         if (snapshot.exists()) {
             const answersArray = Array.from(snapshot.val());
             answersArray.forEach((value, idx)=>{
                 answersList[idx].textContent = value;
             });
-            console.log(snapshot.val());
-        } else console.log("No data available");
+        }
+    });
+};
+const validateAnswer = ()=>{
+    incorrectFilledAnswer.classList.remove("active");
+    incorrectFilledAnswer.textContent = "";
+    if (currentQuestionNumber > 10) currentQuestionNumber = 10;
+    numberOfQuestion.textContent = currentQuestionNumber;
+    currentQuestionNumber++;
+    inputAnswersElements.forEach((el)=>{
+        quizInterface.classList.add("active");
+        let nextTextNodeOfCheckedEl;
+        if (el.checked) nextTextNodeOfCheckedEl = el.nextElementSibling.textContent;
+        (0, _database.get)((0, _database.child)(dbRef, `Quizes/HTML/correctAnswers/Question${questionId}Answer`)).then((snapshot)=>{
+            if (snapshot.exists()) {
+                quizInterface.classList.remove("active");
+                const checkCorrectAnswer = snapshot.val() === nextTextNodeOfCheckedEl;
+                if (checkCorrectAnswer) {
+                    correctAnswersCounter++;
+                    console.log(correctAnswersCounter);
+                }
+                for (element of inputAnswersElements)element.checked = false;
+            }
+        });
     });
 };
 startQuizBtn.addEventListener("click", ()=>{
@@ -552,9 +579,22 @@ startQuizBtn.addEventListener("click", ()=>{
     }, 2500);
     setTimeout(()=>{
         quizInterface.classList.remove("hidden");
-        fetchQuestionFromDB();
-        fetchAvailableAnswersFromDB();
     }, 3500);
+});
+nextQuestionBtn.addEventListener("click", ()=>{
+    const isAnswerChecked = inputAnswersElements.some((el)=>el.checked);
+    if (isAnswerChecked) {
+        validateAnswer();
+        fetchRandomQuestionFromDB();
+        fetchAvailableAnswersFromDB();
+    } else {
+        incorrectFilledAnswer.textContent = "Please select at least one answer";
+        incorrectFilledAnswer.classList.add("active");
+    }
+});
+window.addEventListener("DOMContentLoaded", ()=>{
+    fetchRandomQuestionFromDB();
+    fetchAvailableAnswersFromDB();
 });
 
 },{"firebase/app":"5wGMN","firebase/database":"bpqHw"}],"5wGMN":[function(require,module,exports) {
