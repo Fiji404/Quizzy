@@ -23,7 +23,7 @@ quizesSections.forEach((el) => {
             redirectNotyfication.classList.add('active');
             setTimeout(() => {
                 window.location.replace(`${window.location.href}${targetQuizName}.html`);
-            }, 3000)
+            }, 3000);
         }
     });
 });

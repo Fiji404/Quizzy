@@ -199,3 +199,69 @@ body {
         text-align: center;
     }
 }
+
+.finished-quiz-result {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background-color: colors.$nav;
+    padding: 1rem;
+    border-radius: .4rem;
+    flex-direction: column;
+    &.active {
+        display: flex;
+    }
+    &__title {
+        color: colors.$blue-clr;
+        text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    .quiz-statistics {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        &__view-answer-btn {
+            background-color: lighten(colors.$nav, 20);
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            padding: .4rem 1rem;
+            display: block;
+            margin: 1rem auto 0 auto;
+            font-size: 1.1rem;
+            border-radius: .4rem;
+            cursor: pointer;
+            color: #fff;
+            &:hover {
+                background-color: lighten(colors.$nav, 30);
+            }
+
+            
+        }
+        &__col {
+            border-radius: .4rem;
+            padding: .5rem 1rem;
+        }
+        &__info {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        &__output {
+            background-color: lighten(colors.$nav, 20);
+            display: block;
+            padding: 1rem;
+            border-radius: .4rem;
+            text-align: center;
+            font-size: 2rem;
+            &_correct {
+                color: colors.$green;
+            }
+            &_badly {
+                color: darken(colors.$light-red, 15);
+            }
+        }
+    }
+}
