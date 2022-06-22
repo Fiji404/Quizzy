@@ -2,8 +2,9 @@
 @use './partials/colors';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
 
-
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -12,20 +13,26 @@
 body {
     background-color: colors.$bg;
     font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .quiz-container {
-    margin-top: 2rem;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     .intro-section {
         margin-inline: auto;
         width: fit-content;
         text-align: center;
         transition: opacity 200ms;
         &.hidden {
-            opacity: 0;
-            user-select: none;
+            display: none;
         }
-        &__title  {
+        &__title {
             color: #fff;
             font-size: clamp(1.5rem, 1.8vw, 3rem);
             line-height: 1;
@@ -40,10 +47,10 @@ body {
             border: none;
             background-color: lighten(colors.$nav, 20);
             font-family: 'Poppins', sans-serif;
-            padding: .4rem 1rem;
+            padding: 0.4rem 1rem;
             font-size: 1.4rem;
             color: colors.$white;
-            border-radius: .4rem;
+            border-radius: 0.4rem;
             cursor: pointer;
             transition: background-color 200ms;
             &.active {
@@ -90,8 +97,8 @@ body {
         background-color: colors.$light-red;
         width: min(90%, 350px);
         margin-inline: auto;
-        padding: .5rem 0;
-        border-radius: .4rem;
+        padding: 0.5rem 0;
+        border-radius: 0.4rem;
     }
     &.active {
         &::before {
@@ -122,7 +129,7 @@ body {
     &.hidden {
         opacity: 0;
         user-select: none;
-        transform: scale(.5);
+        transform: scale(0.5);
     }
     &__question {
         color: colors.$white;
@@ -132,12 +139,12 @@ body {
         color: darken(colors.$white, 20);
         text-align: center;
         font-size: 1.1rem;
-        margin-bottom: .7rem;
+        margin-bottom: 0.7rem;
         output {
             display: inline-block;
             width: 30px;
             background-color: colors.$nav;
-            border-radius: .2rem;
+            border-radius: 0.2rem;
             border: 2px solid darken(colors.$white, 30);
             color: colors.$white;
         }
@@ -168,7 +175,7 @@ body {
     &__question-number {
         text-transform: uppercase;
         color: colors.$light-grey;
-        font-size: 1.5rem
+        font-size: 1.5rem;
     }
     &__item {
         margin-top: 1rem;
@@ -205,8 +212,8 @@ body {
     position: absolute;
     inset: 0;
     background-color: colors.$nav;
-    padding: 1rem;
-    border-radius: .4rem;
+    padding: 0.8rem;
+    border-radius: 0.4rem;
     flex-direction: column;
     &.active {
         display: flex;
@@ -222,27 +229,25 @@ body {
         display: flex;
         align-items: center;
         gap: 1rem;
-        padding: 1rem;
         &__view-answer-btn {
             background-color: lighten(colors.$nav, 20);
             border: none;
             font-family: 'Poppins', sans-serif;
-            padding: .4rem 1rem;
             display: block;
-            margin: 1rem auto 0 auto;
+            width: 100%;
+            padding: 0.8rem 1.5rem;
+            display: block;
+            margin-top: 1rem;
             font-size: 1.1rem;
-            border-radius: .4rem;
+            border-radius: 0.4rem;
             cursor: pointer;
             color: #fff;
             &:hover {
                 background-color: lighten(colors.$nav, 30);
             }
-
-            
         }
         &__col {
-            border-radius: .4rem;
-            padding: .5rem 1rem;
+            border-radius: 0.4rem;
         }
         &__info {
             text-align: center;
@@ -253,7 +258,7 @@ body {
             background-color: lighten(colors.$nav, 20);
             display: block;
             padding: 1rem;
-            border-radius: .4rem;
+            border-radius: 0.4rem;
             text-align: center;
             font-size: 2rem;
             &_correct {

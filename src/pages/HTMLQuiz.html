@@ -1,77 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../sass/quiz.scss">
-    <script defer type="module" src="../scripts/quiz.js">module;</script>
-    <title>HTML Quiz</title>
-</head>
-<body>
-    <nav class="nav">
-        <header>
-            <h1 class="nav__page-title">Quizzy</h1>
-        </header>
-        <a href="/" class="nav__change-quiz-btn">Back to Quizes</a>
-    </nav>
-    <main class="quiz-container">
-        <header class="intro-section">
-            <h2 class="intro-section__title">You choose the HTML Quiz !</h2>
-            <p class="intro-section__desc">Click button below to begin</p>
-            <button class="intro-section__btn">Start quiz</button>
-        </header>
-        <section class="quiz-interface hidden">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../sass/quiz.scss" />
+        <script defer type="module" src="../scripts/quiz.js">
+            module;
+        </script>
+        <title>HTML Quiz</title>
+    </head>
+    <body>
+        <nav class="nav">
             <header>
-                <p class="quiz-interface__question-number">Question <output>1</output> of 10 questions</p>
-                <h2 aria-label="question to answer" class="quiz-interface__question"></h2>
+                <h1 class="nav__page-title">Quizzy</h1>
             </header>
-            <ul class="answers-list">
-                <li class="answers-list__item">
-                    <p class="answers-list__question-number">a:</p>
-                    <input class="answers-list__input" id="first-answer" name="quiz-answer" type="radio" />
-                    <label aria-label="Answer 1 to question" class="answers-list__label" for="first-answer"></label>
-                </li>
-                <li class="answers-list__item">
-                    <p class="answers-list__question-number">b:</p>
-                    <input class="answers-list__input" id="second-answer" name="quiz-answer" type="radio" />
-                    <label aria-label="Answer 2 to question" class="answers-list__label" for="second-answer"></label>
-                </li>
-                <li class="answers-list__item">
-                    <p class="answers-list__question-number">c:</p>
-                    <input class="answers-list__input" id="third-answer" name="quiz-answer" type="radio" />
-                    <label aria-label="Answer 3 to question" class="answers-list__label" for="third-answer"></label>
-                </li>
-                <li class="answers-list__item">
-                    <p class="answers-list__question-number">d:</p>
-                    <input class="answers-list__input" id="fourth-answer" name="quiz-answer" type="radio" />
-                    <label aria-label="Answer 4 to question" class="answers-list__label" for="fourth-answer"></label>
-                </li>
-            </ul>
-            <p aria-label="Notyfication about blank provided answer" class="quiz-interface__error"></p>
-            <button class="quiz-interface__give-answer-btn" type="button">Next question</button>
-            <section class="finished-quiz-result">
+            <a href="/" class="nav__change-quiz-btn">Back to Quizes</a>
+        </nav>
+        <main class="quiz-container">
+            <header class="intro-section">
+                <h2 class="intro-section__title">You choose the HTML Quiz !</h2>
+                <p class="intro-section__desc">Click button below to begin</p>
+                <button class="intro-section__btn">Start quiz</button>
+            </header>
+            <section class="quiz-interface hidden">
                 <header>
-                    <h2 class="finished-quiz-result__title">Quiz Results:</h2>
+                    <p class="quiz-interface__question-number">Question <output>1</output> of 10 questions</p>
+                    <h2 aria-label="question to answer" class="quiz-interface__question"></h2>
                 </header>
-                <div class="quiz-statistics">
-                    <section class="quiz-statistics__col">
-                        <header>
-                            <h2 class="quiz-statistics__info">You're correct answers is: </h2>
-                            <output class="quiz-statistics__output quiz-statistics__output_correct">1</output>
-                        </header>
-                        <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn">Look correct answers details</button>
-                    </section>
-                    <section class="quiz-statistics__col">
-                        <header>
-                            <h2 class="quiz-statistics__info">You're badly answers is: </h2>
-                            <output class="quiz-statistics__output quiz-statistics__output_badly">1</output>
-                        </header>
-                        <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn_badly">Look bad answers details</button>
-                    </section>
-                </div>
+                <ul class="answers-list">
+                    <li class="answers-list__item">
+                        <p class="answers-list__question-number">a:</p>
+                        <input class="answers-list__input" id="first-answer" name="quiz-answer" type="radio" />
+                        <label aria-label="Answer 1 to question" class="answers-list__label" for="first-answer"></label>
+                    </li>
+                    <li class="answers-list__item">
+                        <p class="answers-list__question-number">b:</p>
+                        <input class="answers-list__input" id="second-answer" name="quiz-answer" type="radio" />
+                        <label aria-label="Answer 2 to question" class="answers-list__label" for="second-answer"></label>
+                    </li>
+                    <li class="answers-list__item">
+                        <p class="answers-list__question-number">c:</p>
+                        <input class="answers-list__input" id="third-answer" name="quiz-answer" type="radio" />
+                        <label aria-label="Answer 3 to question" class="answers-list__label" for="third-answer"></label>
+                    </li>
+                    <li class="answers-list__item">
+                        <p class="answers-list__question-number">d:</p>
+                        <input class="answers-list__input" id="fourth-answer" name="quiz-answer" type="radio" />
+                        <label aria-label="Answer 4 to question" class="answers-list__label" for="fourth-answer"></label>
+                    </li>
+                </ul>
+                <p aria-label="Notyfication about blank provided answer" class="quiz-interface__error"></p>
+                <button class="quiz-interface__give-answer-btn" type="button">Next question</button>
+                <section class="finished-quiz-result">
+                    <header>
+                        <h2 class="finished-quiz-result__title">Quiz Results:</h2>
+                    </header>
+                    <div class="quiz-statistics">
+                        <section class="quiz-statistics__col">
+                            <header>
+                                <h2 class="quiz-statistics__info">You're correct answers is:</h2>
+                                <output class="quiz-statistics__output quiz-statistics__output_correct">1</output>
+                            </header>
+                            <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn">
+                                Look correct answers details
+                            </button>
+                        </section>
+                        <section class="quiz-statistics__col">
+                            <header>
+                                <h2 class="quiz-statistics__info">You're badly answers is:</h2>
+                                <output class="quiz-statistics__output quiz-statistics__output_badly">1</output>
+                            </header>
+                            <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn_badly">
+                                Look bad answers details
+                            </button>
+                        </section>
+                    </div>
+                </section>
             </section>
-        </section>
-    </main>
-</body>
+        </main>
+    </body>
 </html>
