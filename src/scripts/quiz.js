@@ -30,69 +30,72 @@ const quizStatisticsBadAnswers = document.querySelector('.quiz-statistics__outpu
 let currentQuestionNumber = 1;
 let correctAnswersCounter = 0;
 let badAnswersCounter = 0;
-let randomQuestionId;
+let randomQuestionId = 0;
 const queriedQuestionsArray = [];
+const quizName = document.body.dataset.quizName;
 
+//? OK
 const fetchRandomQuestionFromDB = () => {
+    quizInterface.classList.add('active')
     randomQuestionId = Math.trunc(Math.random() * 20) + 1;
-    const isQuestionWasDrawn = queriedQuestionsArray.includes(randomQuestionId);
-    if (!isQuestionWasDrawn) {
-        queriedQuestionsArray.push(randomQuestionId);
-    } else {
-        randomQuestionId = checkForQueriedQuestion();
-        queriedQuestionsArray.push(randomQuestionId);
-    }
-    console.log(queriedQuestionsArray);
-    get(child(dbRef, `Quizes/HTML/Questions/Question${randomQuestionId}`)).then(snapshot => {
+    randomQuestionId = checkIsQuestionWasDrawn(randomQuestionId);
+    get(child(dbRef, `Quizes/${quizName}/Questions/Question${randomQuestionId}`)).then(snapshot => {
         if (snapshot.exists()) {
             quizInterfaceQuestion.textContent = snapshot.val();
         }
     });
+    fetchAvailableAnswersOfQuestionFromDB()
 };
 
-const checkForQueriedQuestion = () => {
-    while (queriedQuestionsArray.includes(randomQuestionId)) {
-        randomQuestionId = Math.trunc(Math.random() * 20) + 1;
+//? OK
+const checkIsQuestionWasDrawn = questionID => {
+    const isQuestionWasDrawn = queriedQuestionsArray.includes(questionID);
+    if (isQuestionWasDrawn) {
+        while (queriedQuestionsArray.includes(questionID)) {
+            questionID = Math.trunc(Math.random() * 20) + 1;
+        }
+    } else {
+        queriedQuestionsArray.push(questionID);
     }
-    return randomQuestionId;
+    return questionID;
 };
+
+
 
 const fetchAvailableAnswersOfQuestionFromDB = () => {
-    get(child(dbRef, `Quizes/HTML/Answers/Question${randomQuestionId}Answers`)).then(snapshot => {
+    get(child(dbRef, `Quizes/${quizName}/Answers/Question${randomQuestionId}Answers`)).then(snapshot => {
+        quizInterface.classList.remove('active');
         if (snapshot.exists()) {
-            const answersResponseArray = snapshot.val();
-            answersResponseArray.forEach((value, idx) => {
-                answersLabelElements[idx].textContent = value;
+            const availableAnswersArray = Array.from(snapshot.val());
+            availableAnswersArray.forEach((val, idx) => {
+                answersLabelElements[idx].textContent = val;
             });
         }
     });
 };
 
-const validateAnswer = () => {
-    incorrectAnswerNotyfication.classList.remove('active');
-    incorrectAnswerNotyfication.textContent = '';
+const validateAnswerFromUser = () => {
     if (currentQuestionNumber === 10) {
         nextQuestionBtn.textContent = 'Finish quiz';
-        currentQuestionNumber = 10;
     }
-    quizInterface.classList.add('active');
-    currentQuestionElement.textContent = currentQuestionNumber;
     inputAnswersElements.forEach(el => {
-        const nextTextNodeOfCheckedEl = el.checked ? el.nextElementSibling.textContent : false;
-        get(child(dbRef, `Quizes/HTML/correctAnswers/Question${randomQuestionId}Answer`)).then(snapshot => {
+        let nextSiblingLabelElementOfInput;
+        if (el.checked) nextSiblingLabelElementOfInput = el.nextElementSibling.textContent;
+        console.log(nextSiblingLabelElementOfInput);
+        get(child(dbRef, `Quizes/${quizName}/correctAnswers/Question${randomQuestionId}Answer`)).then(snapshot => {
             if (snapshot.exists()) {
-                quizInterface.classList.remove('active');
-                const checkCorrectAnswer = snapshot.val() === nextTextNodeOfCheckedEl;
-                if (checkCorrectAnswer) {
+                console.log(snapshot.val());
+                if (snapshot.val() === nextSiblingLabelElementOfInput) {
                     correctAnswersCounter++;
-                } else if (nextTextNodeOfCheckedEl) {
+                    console.log(correctAnswersCounter);
+                } else if (nextSiblingLabelElementOfInput !== snapshot.val() && el.checked) {
                     badAnswersCounter++;
+                    console.log(badAnswersCounter);
                 }
-                el.checked = false;
+                el.checked = false
             }
         });
     });
-    currentQuestionNumber++
 };
 
 const handleFinalPlayerScores = () => {
@@ -101,6 +104,29 @@ const handleFinalPlayerScores = () => {
     quizStatisticsCorrectAnswers.textContent = correctAnswersCounter;
     quizStatisticsBadAnswers.textContent = badAnswersCounter;
 };
+
+
+nextQuestionBtn.addEventListener('click', () => {
+    currentQuestionNumber++;
+    currentQuestionElement.textContent = currentQuestionNumber;
+    const isAnswerChecked = inputAnswersElements.some(el => el.checked);
+    const isQuizFinished = currentQuestionNumber === 11;
+    if (!isQuizFinished && isAnswerChecked) {
+        validateAnswerFromUser();
+        fetchRandomQuestionFromDB();
+        incorrectAnswerNotyfication.textContent = '';
+        incorrectAnswerNotyfication.classList.remove('active');
+    } else if (!isAnswerChecked) {
+        incorrectAnswerNotyfication.textContent = 'Please select at least one answer';
+        incorrectAnswerNotyfication.classList.add('active');
+    } else if (isQuizFinished) {
+        handleFinalPlayerScores();
+    }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    fetchRandomQuestionFromDB();
+});
 
 startQuizBtn.addEventListener('click', () => {
     startQuizBtn.textContent = '';
@@ -111,25 +137,4 @@ startQuizBtn.addEventListener('click', () => {
     setTimeout(() => {
         quizInterface.classList.remove('hidden');
     }, 3500);
-});
-
-nextQuestionBtn.addEventListener('click', () => {
-    const isAnswerChecked = inputAnswersElements.some(el => el.checked);
-    const isQuizFinished = currentQuestionNumber - 1 === 10;
-    if (!isQuizFinished && isAnswerChecked) {
-        fetchRandomQuestionFromDB();
-        fetchAvailableAnswersOfQuestionFromDB();
-        validateAnswer();
-        console.log(currentQuestionNumber)
-    } else if (!isAnswerChecked) {
-        incorrectAnswerNotyfication.textContent = 'Please select at least one answer';
-        incorrectAnswerNotyfication.classList.add('active');
-    } else {
-        handleFinalPlayerScores();
-    }
-});
-
-window.addEventListener('DOMContentLoaded', () => {
-    fetchRandomQuestionFromDB();
-    fetchAvailableAnswersOfQuestionFromDB();
 });

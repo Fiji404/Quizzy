@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../sass/quiz.scss" />
-        <script defer type="module" src="../scripts/quiz.js">
-            module;
-        </script>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/CSS-Quiz.22cea730.css">
+        <script defer="" src="/CSS-Quiz.9926aff6.js">module;
+
+</script>
+        <link rel="icon" href="/html5-icon.711f7ff3.svg" type="xml/svg">
         <title>HTML Quiz</title>
     </head>
-    <body>
+    <body data-quiz-name="HTML">
         <nav class="nav">
             <header>
                 <h1 class="nav__page-title">Quizzy</h1>
@@ -31,22 +32,22 @@
                 <ul class="answers-list">
                     <li class="answers-list__item">
                         <p class="answers-list__question-number">a:</p>
-                        <input class="answers-list__input" id="first-answer" name="quiz-answer" type="radio" />
+                        <input class="answers-list__input" id="first-answer" name="quiz-answer" type="radio">
                         <label aria-label="Answer 1 to question" class="answers-list__label" for="first-answer"></label>
                     </li>
                     <li class="answers-list__item">
                         <p class="answers-list__question-number">b:</p>
-                        <input class="answers-list__input" id="second-answer" name="quiz-answer" type="radio" />
+                        <input class="answers-list__input" id="second-answer" name="quiz-answer" type="radio">
                         <label aria-label="Answer 2 to question" class="answers-list__label" for="second-answer"></label>
                     </li>
                     <li class="answers-list__item">
                         <p class="answers-list__question-number">c:</p>
-                        <input class="answers-list__input" id="third-answer" name="quiz-answer" type="radio" />
+                        <input class="answers-list__input" id="third-answer" name="quiz-answer" type="radio">
                         <label aria-label="Answer 3 to question" class="answers-list__label" for="third-answer"></label>
                     </li>
                     <li class="answers-list__item">
                         <p class="answers-list__question-number">d:</p>
-                        <input class="answers-list__input" id="fourth-answer" name="quiz-answer" type="radio" />
+                        <input class="answers-list__input" id="fourth-answer" name="quiz-answer" type="radio">
                         <label aria-label="Answer 4 to question" class="answers-list__label" for="fourth-answer"></label>
                     </li>
                 </ul>
@@ -60,7 +61,7 @@
                         <section class="quiz-statistics__col">
                             <header>
                                 <h2 class="quiz-statistics__info">You're correct answers is:</h2>
-                                <output class="quiz-statistics__output quiz-statistics__output_correct">1</output>
+                                <output aria-label="correct answers output" class="quiz-statistics__output quiz-statistics__output_correct"></output>
                             </header>
                             <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn">
                                 Look correct answers details
@@ -69,7 +70,7 @@
                         <section class="quiz-statistics__col">
                             <header>
                                 <h2 class="quiz-statistics__info">You're badly answers is:</h2>
-                                <output class="quiz-statistics__output quiz-statistics__output_badly">1</output>
+                                <output aria-label="bad answers output" class="quiz-statistics__output quiz-statistics__output_badly"></output>
                             </header>
                             <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn_badly">
                                 Look bad answers details

@@ -23,7 +23,7 @@ quizesSections.forEach((el) => {
             const targetQuizName = e.target.dataset.quizName;
             redirectNotyfication.classList.add('active');
             setTimeout(() => {
-                window.location.replace(`${window.location.href}${targetQuizName}.html`);
+                window.location.href = `${window.location.href}${targetQuizName}.html`;
             }, 3000);
         }
     });
