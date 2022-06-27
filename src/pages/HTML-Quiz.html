@@ -8,13 +8,15 @@
         <script defer type="module" src="../scripts/quiz.js">
             module;
         </script>
-        <link rel="icon" href="../icons/html5-icon.svg" type="xml/svg">
+        <link rel="icon" href="../icons/html5-icon.svg" type="xml/svg" />
         <title>HTML Quiz</title>
     </head>
     <body data-quiz-name="HTML">
         <nav class="nav">
             <header>
-                <h1 class="nav__page-title">Quizzy</h1>
+                <a class="nav__back-to-home-link" href="/">
+                    <h1 class="nav__page-title">Quizzy</h1>
+                </a>
             </header>
             <a href="/" class="nav__change-quiz-btn">Back to Quizes</a>
         </nav>
@@ -61,7 +63,10 @@
                         <section class="quiz-statistics__col">
                             <header>
                                 <h2 class="quiz-statistics__info">You're correct answers is:</h2>
-                                <output aria-label="correct answers output" class="quiz-statistics__output quiz-statistics__output_correct"></output>
+                                <output
+                                    aria-label="correct answers output"
+                                    class="quiz-statistics__output quiz-statistics__output_correct"
+                                ></output>
                             </header>
                             <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn">
                                 Look correct answers details
@@ -70,7 +75,10 @@
                         <section class="quiz-statistics__col">
                             <header>
                                 <h2 class="quiz-statistics__info">You're badly answers is:</h2>
-                                <output aria-label="bad answers output" class="quiz-statistics__output quiz-statistics__output_badly"></output>
+                                <output
+                                    aria-label="bad answers output"
+                                    class="quiz-statistics__output quiz-statistics__output_badly"
+                                ></output>
                             </header>
                             <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn_badly">
                                 Look bad answers details

@@ -14,6 +14,10 @@
   top: 0;
 }
 
+.nav__back-to-home-link {
+  text-decoration: none;
+}
+
 .nav__back-from-quizes {
   z-index: 5;
   width: 3rem;
@@ -39,6 +43,12 @@
 .nav__page-title {
   color: #07f;
   font-size: 2rem;
+  transition: color .2s;
+}
+
+.nav__page-title:hover {
+  color: #ebebeb;
+  -webkit-text-stroke: 1px #07f;
 }
 
 .nav__quiz-type {

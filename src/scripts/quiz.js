@@ -34,7 +34,6 @@ let randomQuestionId = 0;
 const queriedQuestionsArray = [];
 const quizName = document.body.dataset.quizName;
 
-//? OK
 const fetchRandomQuestionFromDB = () => {
     quizInterface.classList.add('active')
     randomQuestionId = Math.trunc(Math.random() * 20) + 1;
@@ -47,7 +46,6 @@ const fetchRandomQuestionFromDB = () => {
     fetchAvailableAnswersOfQuestionFromDB()
 };
 
-//? OK
 const checkIsQuestionWasDrawn = questionID => {
     const isQuestionWasDrawn = queriedQuestionsArray.includes(questionID);
     if (isQuestionWasDrawn) {
@@ -78,24 +76,29 @@ const validateAnswerFromUser = () => {
     if (currentQuestionNumber === 10) {
         nextQuestionBtn.textContent = 'Finish quiz';
     }
-    inputAnswersElements.forEach(el => {
-        let nextSiblingLabelElementOfInput;
-        if (el.checked) nextSiblingLabelElementOfInput = el.nextElementSibling.textContent;
-        console.log(nextSiblingLabelElementOfInput);
-        get(child(dbRef, `Quizes/${quizName}/correctAnswers/Question${randomQuestionId}Answer`)).then(snapshot => {
-            if (snapshot.exists()) {
-                console.log(snapshot.val());
-                if (snapshot.val() === nextSiblingLabelElementOfInput) {
-                    correctAnswersCounter++;
-                    console.log(correctAnswersCounter);
-                } else if (nextSiblingLabelElementOfInput !== snapshot.val() && el.checked) {
-                    badAnswersCounter++;
-                    console.log(badAnswersCounter);
+    if (!(currentQuestionNumber === 10)) {
+        inputAnswersElements.forEach(el => {
+            let nextSiblingLabelElementOfInput;
+            if (el.checked) nextSiblingLabelElementOfInput = el.nextElementSibling.textContent;
+            get(child(dbRef, `Quizes/${quizName}/correctAnswers/Question${randomQuestionId}Answer`)).then(snapshot => {
+                if (snapshot.exists()) {
+                    if (snapshot.val() === nextSiblingLabelElementOfInput) {
+                        correctAnswersCounter++;
+                        console.log('Correct:', correctAnswersCounter);
+                    } else if (nextSiblingLabelElementOfInput !== snapshot.val() && el.checked) {
+                        badAnswersCounter++;
+                        console.log('Bad:', badAnswersCounter);
+                    }
+                    el.checked = false
+                } else {
+                    console.log('no data');
                 }
-                el.checked = false
-            }
+            });
         });
-    });
+
+    }
+    currentQuestionNumber++;
+    currentQuestionElement.textContent = currentQuestionNumber;
 };
 
 const handleFinalPlayerScores = () => {
@@ -107,10 +110,9 @@ const handleFinalPlayerScores = () => {
 
 
 nextQuestionBtn.addEventListener('click', () => {
-    currentQuestionNumber++;
-    currentQuestionElement.textContent = currentQuestionNumber;
     const isAnswerChecked = inputAnswersElements.some(el => el.checked);
-    const isQuizFinished = currentQuestionNumber === 11;
+    console.log('Current Question num:', currentQuestionNumber)
+    const isQuizFinished = currentQuestionNumber === 10;
     if (!isQuizFinished && isAnswerChecked) {
         validateAnswerFromUser();
         fetchRandomQuestionFromDB();
@@ -121,7 +123,7 @@ nextQuestionBtn.addEventListener('click', () => {
         incorrectAnswerNotyfication.classList.add('active');
     } else if (isQuizFinished) {
         handleFinalPlayerScores();
-    }
+    } 
 });
 
 window.addEventListener('DOMContentLoaded', () => {

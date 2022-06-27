@@ -1,4 +1,4 @@
-@use "colors";
+@use 'colors';
 .nav {
     padding: 1rem 2rem;
     display: flex;
@@ -12,6 +12,9 @@
     position: sticky;
     top: 0;
     z-index: 1;
+    &__back-to-home-link {
+        text-decoration: none;
+    }
     &__back-from-quizes {
         position: fixed;
         top: -3rem;
@@ -29,12 +32,17 @@
         cursor: pointer;
         transition: top 200ms;
         &:active {
-            transform: translateX(-50%) scale(.98);
+            transform: translateX(-50%) scale(0.98);
         }
     }
     &__page-title {
         color: colors.$darker-blue;
         font-size: 2rem;
+        transition: color 200ms ease;
+        &:hover {
+            color: colors.$white;
+            -webkit-text-stroke: 1px colors.$darker-blue;
+        }
     }
     &__quiz-type {
         font-weight: 500;
@@ -45,14 +53,14 @@
         background-color: colors.$nav-btn;
         color: colors.$white;
         font-family: Poppins, sans-serif;
-        padding: .4rem 1rem;
-        border-radius: .3rem;
+        padding: 0.4rem 1rem;
+        border-radius: 0.3rem;
         border: 2px solid colors.$white;
         cursor: pointer;
         font-size: 1.1rem;
         transition: transform 150ms ease;
         &:active {
-            transform: scale(.98);
+            transform: scale(0.98);
         }
     }
 }

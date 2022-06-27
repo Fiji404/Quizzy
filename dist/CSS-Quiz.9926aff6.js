@@ -537,7 +537,6 @@ let badAnswersCounter = 0;
 let randomQuestionId = 0;
 const queriedQuestionsArray = [];
 const quizName = document.body.dataset.quizName;
-//? OK
 const fetchRandomQuestionFromDB = ()=>{
     quizInterface.classList.add("active");
     randomQuestionId = Math.trunc(Math.random() * 20) + 1;
@@ -547,7 +546,6 @@ const fetchRandomQuestionFromDB = ()=>{
     });
     fetchAvailableAnswersOfQuestionFromDB();
 };
-//? OK
 const checkIsQuestionWasDrawn = (questionID)=>{
     const isQuestionWasDrawn = queriedQuestionsArray.includes(questionID);
     if (isQuestionWasDrawn) while(queriedQuestionsArray.includes(questionID))questionID = Math.trunc(Math.random() * 20) + 1;
@@ -567,24 +565,24 @@ const fetchAvailableAnswersOfQuestionFromDB = ()=>{
 };
 const validateAnswerFromUser = ()=>{
     if (currentQuestionNumber === 10) nextQuestionBtn.textContent = "Finish quiz";
-    inputAnswersElements.forEach((el)=>{
+    if (!(currentQuestionNumber === 10)) inputAnswersElements.forEach((el)=>{
         let nextSiblingLabelElementOfInput;
         if (el.checked) nextSiblingLabelElementOfInput = el.nextElementSibling.textContent;
-        console.log(nextSiblingLabelElementOfInput);
         (0, _database.get)((0, _database.child)(dbRef, `Quizes/${quizName}/correctAnswers/Question${randomQuestionId}Answer`)).then((snapshot)=>{
             if (snapshot.exists()) {
-                console.log(snapshot.val());
                 if (snapshot.val() === nextSiblingLabelElementOfInput) {
                     correctAnswersCounter++;
-                    console.log(correctAnswersCounter);
+                    console.log("Correct:", correctAnswersCounter);
                 } else if (nextSiblingLabelElementOfInput !== snapshot.val() && el.checked) {
                     badAnswersCounter++;
-                    console.log(badAnswersCounter);
+                    console.log("Bad:", badAnswersCounter);
                 }
                 el.checked = false;
-            }
+            } else console.log("no data");
         });
     });
+    currentQuestionNumber++;
+    currentQuestionElement.textContent = currentQuestionNumber;
 };
 const handleFinalPlayerScores = ()=>{
     quizInterface.classList.remove("active");
@@ -593,10 +591,9 @@ const handleFinalPlayerScores = ()=>{
     quizStatisticsBadAnswers.textContent = badAnswersCounter;
 };
 nextQuestionBtn.addEventListener("click", ()=>{
-    currentQuestionNumber++;
-    currentQuestionElement.textContent = currentQuestionNumber;
     const isAnswerChecked = inputAnswersElements.some((el)=>el.checked);
-    const isQuizFinished = currentQuestionNumber === 11;
+    console.log("Current Question num:", currentQuestionNumber);
+    const isQuizFinished = currentQuestionNumber === 10;
     if (!isQuizFinished && isAnswerChecked) {
         validateAnswerFromUser();
         fetchRandomQuestionFromDB();

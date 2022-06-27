@@ -526,7 +526,7 @@ quizesSections.forEach((el)=>{
             redirectNotyfication.classList.add("active");
             setTimeout(()=>{
                 window.location.href = `${window.location.href}${targetQuizName}.html`;
-            }, 3000);
+            }, 2500);
         }
     });
 });
