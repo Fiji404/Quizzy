@@ -48,7 +48,6 @@
 
 .nav__page-title:hover {
   color: #ebebeb;
-  -webkit-text-stroke: 1px #07f;
 }
 
 .nav__quiz-type {
@@ -107,6 +106,8 @@ body {
 
 .quiz-container .intro-section__title {
   color: #fff;
+  text-align: center;
+  margin-bottom: 1rem;
   font-size: clamp(1.5rem, 1.8vw, 3rem);
   line-height: 1;
 }
@@ -167,6 +168,12 @@ body {
   position: relative;
 }
 
+.quiz-interface__flag-img {
+  max-width: 90%;
+  margin-inline: auto;
+  display: block;
+}
+
 .quiz-interface__error.active {
   text-align: center;
   color: #d2d2d2;
@@ -208,8 +215,7 @@ body {
 }
 
 .quiz-interface.hidden {
-  opacity: 0;
-  user-select: none;
+  display: none;
   transform: scale(.5);
 }
 

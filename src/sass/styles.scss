@@ -56,6 +56,7 @@ html::-webkit-scrollbar-track {
 }
 
 .main-content {
+    min-height: 100vh;
     margin-top: 1rem;
     max-width: 95%;
     margin-inline: auto;
@@ -63,6 +64,8 @@ html::-webkit-scrollbar-track {
 }
 
 .overview-intro {
+    min-height: 100vh;
+    scroll-snap-align: center;
     &__title {
         font-size: clamp(1.8rem, 2vw, 3rem);
         text-align: center;
@@ -182,5 +185,46 @@ html::-webkit-scrollbar-track {
     transition: top 200ms;
     &.active {
         top: 1rem;
+    }
+}
+
+.app-description-section {
+    &__title {
+        text-align: center;
+        font-size: clamp(1.4rem, 1.4vw + .7rem, 2.5rem);
+        text-transform: capitalize;
+        color: colors.$darker-blue;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.available-quizes {
+    &__title {
+        font-size: clamp(1.2rem, 1.3vw + .5rem, 2.2rem);
+        margin-bottom: 1rem;
+    }
+    &__list {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+    &__quiz {
+        padding: .5rem 1rem;
+        background-color: colors.$nav;
+        border-radius: .4rem;
+        font-size: 1.4rem;
+        border: 2px solid lighten(colors.$nav, 20);
+        cursor: default;
+        transition: background-color 100ms;
+        &:hover {
+            background-color: lighten(colors.$nav, 5);
+        }
+        > span {
+            color: colors.$blue-clr;
+            &.not-available {
+                color: colors.$transparent-red
+            }
+        }
     }
 }

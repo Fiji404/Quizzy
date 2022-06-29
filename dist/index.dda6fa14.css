@@ -48,7 +48,6 @@
 
 .nav__page-title:hover {
   color: #ebebeb;
-  -webkit-text-stroke: 1px #07f;
 }
 
 .nav__quiz-type {
@@ -126,10 +125,16 @@ html::-webkit-scrollbar-track {
 }
 
 .main-content {
+  min-height: 100vh;
   max-width: 95%;
   margin-top: 1rem;
   color: #ebebeb;
   margin-inline: auto;
+}
+
+.overview-intro {
+  min-height: 100vh;
+  scroll-snap-align: center;
 }
 
 .overview-intro__title {
@@ -270,6 +275,48 @@ html::-webkit-scrollbar-track {
 
 .redirect-notification.active {
   top: 1rem;
+}
+
+.app-description-section__title {
+  text-align: center;
+  text-transform: capitalize;
+  color: #07f;
+  margin-bottom: 1.5rem;
+  font-size: clamp(1.4rem, 1.4vw + .7rem, 2.5rem);
+}
+
+.available-quizes__title {
+  margin-bottom: 1rem;
+  font-size: clamp(1.2rem, 1.3vw + .5rem, 2.2rem);
+}
+
+.available-quizes__list {
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  list-style: none;
+  display: flex;
+}
+
+.available-quizes__quiz {
+  cursor: default;
+  background-color: #424242;
+  border: 2px solid #757575;
+  border-radius: .4rem;
+  padding: .5rem 1rem;
+  font-size: 1.4rem;
+  transition: background-color .1s;
+}
+
+.available-quizes__quiz:hover {
+  background-color: #4f4f4f;
+}
+
+.available-quizes__quiz > span {
+  color: #30b1eb;
+}
+
+.available-quizes__quiz > span.not-available {
+  color: #fa5c5c;
 }
 
 /*# sourceMappingURL=index.dda6fa14.css.map */

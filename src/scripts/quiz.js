@@ -76,7 +76,6 @@ const validateAnswerFromUser = () => {
     if (currentQuestionNumber === 10) {
         nextQuestionBtn.textContent = 'Finish quiz';
     }
-    if (!(currentQuestionNumber === 10)) {
         inputAnswersElements.forEach(el => {
             let nextSiblingLabelElementOfInput;
             if (el.checked) nextSiblingLabelElementOfInput = el.nextElementSibling.textContent;
@@ -95,8 +94,6 @@ const validateAnswerFromUser = () => {
                 }
             });
         });
-
-    }
     currentQuestionNumber++;
     currentQuestionElement.textContent = currentQuestionNumber;
 };
@@ -122,6 +119,7 @@ nextQuestionBtn.addEventListener('click', () => {
         incorrectAnswerNotyfication.textContent = 'Please select at least one answer';
         incorrectAnswerNotyfication.classList.add('active');
     } else if (isQuizFinished) {
+        validateAnswerFromUser()
         handleFinalPlayerScores();
     } 
 });

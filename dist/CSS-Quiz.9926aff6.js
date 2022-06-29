@@ -565,7 +565,7 @@ const fetchAvailableAnswersOfQuestionFromDB = ()=>{
 };
 const validateAnswerFromUser = ()=>{
     if (currentQuestionNumber === 10) nextQuestionBtn.textContent = "Finish quiz";
-    if (!(currentQuestionNumber === 10)) inputAnswersElements.forEach((el)=>{
+    inputAnswersElements.forEach((el)=>{
         let nextSiblingLabelElementOfInput;
         if (el.checked) nextSiblingLabelElementOfInput = el.nextElementSibling.textContent;
         (0, _database.get)((0, _database.child)(dbRef, `Quizes/${quizName}/correctAnswers/Question${randomQuestionId}Answer`)).then((snapshot)=>{
@@ -602,7 +602,10 @@ nextQuestionBtn.addEventListener("click", ()=>{
     } else if (!isAnswerChecked) {
         incorrectAnswerNotyfication.textContent = "Please select at least one answer";
         incorrectAnswerNotyfication.classList.add("active");
-    } else if (isQuizFinished) handleFinalPlayerScores();
+    } else if (isQuizFinished) {
+        validateAnswerFromUser();
+        handleFinalPlayerScores();
+    }
 });
 window.addEventListener("DOMContentLoaded", ()=>{
     fetchRandomQuestionFromDB();
