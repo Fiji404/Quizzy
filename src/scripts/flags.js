@@ -24,8 +24,9 @@ const getOneCorrectCountryName = () => {
 };
 
 const getRandomCountryNames = () => {
+    const flagsListLength = Object.keys(flagsList).length;
     labelAnswersList.forEach((el) => {
-        el.textContent = flagsList[Math.trunc(Math.random() * 90) + 1];
+        el.textContent = flagsList[Math.trunc(Math.random() * flagsListLength) + 1];
     });
     setTimeout(() => {
         quizInterface.classList.remove('active')
@@ -50,6 +51,7 @@ const checkIfAnswerIsCorrect = () => {
 };
 
 const handleFinalPlayerScores = () => {
+    imgFlagElement.src = '#';
     quizInterface.classList.remove('active');
     quizStatisticsDashboard.classList.add('active');
     quizStatisticsCorrectAnswers.textContent = correctAnswersCounter;
