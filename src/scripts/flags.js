@@ -12,6 +12,7 @@ const currentQuestionElement = document.querySelector('.quiz-interface__question
 const quizStatisticsDashboard = document.querySelector('.finished-quiz-result');
 const quizStatisticsCorrectAnswers = document.querySelector('.quiz-statistics__output_correct');
 const quizStatisticsBadAnswers = document.querySelector('.quiz-statistics__output_badly');
+const questionsNumberPreference = document.querySelector('.number-of-questions')
 let currentFlagName;
 let correctAnswersCounter = 0;
 let badAnswersCounter = 0;
@@ -25,17 +26,17 @@ const getOneCorrectCountryName = () => {
 
 const getRandomCountryNames = () => {
     const flagsListLength = Object.keys(flagsList).length;
-    labelAnswersList.forEach((el) => {
+    labelAnswersList.forEach(el => {
         el.textContent = flagsList[Math.trunc(Math.random() * flagsListLength) + 1];
     });
     setTimeout(() => {
-        quizInterface.classList.remove('active')
-    }, 1000)
+        quizInterface.classList.remove('active');
+    }, 1000);
 };
 
 const checkIfAnswerIsCorrect = () => {
     quizInterface.classList.add('active');
-    inputAnswerElements.forEach((el) => {
+    inputAnswerElements.forEach(el => {
         if (el.checked) {
             const nextSiblingLabelElement = el.nextElementSibling;
             if (nextSiblingLabelElement.textContent === currentFlagName) {
@@ -59,16 +60,18 @@ const handleFinalPlayerScores = () => {
 };
 
 nextQuestionBtn.addEventListener('click', () => {
-    const isAnyAnswerChecked = inputAnswerElements.some((el) => el.checked);
-    const isTheLastQuestion = currentQuestionNumber === 15;
+    let questionsNumber = questionsNumberPreference.textContent;
+    const isAnyAnswerChecked = inputAnswerElements.some(el => el.checked);
+    const questionsAmount = questionsNumberPreference.textContent.length === 11 ? questionsNumberPreference.textContent.slice(0, 1) : questionsNumberPreference.textContent.slice(0, 2)
+    const isTheLastQuestion = currentQuestionNumber === Number(questionsAmount);
     if (isAnyAnswerChecked && !isTheLastQuestion) {
         incorrectAnswerNotyfication.textContent = '';
         incorrectAnswerNotyfication.classList.remove('active');
         currentQuestionNumber++;
         currentQuestionElement.textContent = currentQuestionNumber;
         checkIfAnswerIsCorrect();
-        getRandomCountryNames()
-        getOneCorrectCountryName()
+        getRandomCountryNames();
+        getOneCorrectCountryName();
     } else if (isTheLastQuestion) {
         handleFinalPlayerScores();
     } else {

@@ -1,5 +1,7 @@
 @use './partials/navigation';
 @use './partials/colors';
+@use './partials/mixins';
+@use './partials/aside';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
 
 *,
@@ -10,12 +12,15 @@
     box-sizing: border-box;
 }
 
+
 body {
     background-color: colors.$bg;
     font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
+    @include mixins.scrollStyle;
 }
 
 .quiz-container {
@@ -23,7 +28,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    position: relative;
+    > article {
+        flex-grow: 1;
+    }
     .intro-section {
         margin-inline: auto;
         width: fit-content;
@@ -81,7 +89,7 @@ body {
 }
 
 .quiz-interface {
-    width: min(90%, 650px);
+    width: min(90%, 600px);
     border: 2px solid darken(colors.$white, 40);
     padding: 2rem 1rem;
     margin-inline: auto;
@@ -92,7 +100,8 @@ body {
     position: relative;
     &__flag-img {
         display: block; 
-        max-width: 90%;
+        width: min(95%, 600px);
+        max-height: 300px;
         margin-inline: auto;
     }
     &__error.active {
@@ -148,7 +157,7 @@ body {
         margin-bottom: 0.7rem;
         output {
             display: inline-block;
-            width: 30px;
+            padding: .05rem .5rem;
             background-color: colors.$nav;
             border-radius: 0.2rem;
             border: 2px solid darken(colors.$white, 30);

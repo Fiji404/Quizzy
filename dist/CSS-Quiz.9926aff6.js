@@ -531,6 +531,7 @@ const incorrectAnswerNotyfication = document.querySelector(".quiz-interface__err
 const quizStatisticsDashboard = document.querySelector(".finished-quiz-result");
 const quizStatisticsCorrectAnswers = document.querySelector(".quiz-statistics__output_correct");
 const quizStatisticsBadAnswers = document.querySelector(".quiz-statistics__output_badly");
+const questionsNumberPreference = document.querySelector(".number-of-questions");
 let currentQuestionNumber = 1;
 let correctAnswersCounter = 0;
 let badAnswersCounter = 0;
@@ -593,7 +594,8 @@ const handleFinalPlayerScores = ()=>{
 nextQuestionBtn.addEventListener("click", ()=>{
     const isAnswerChecked = inputAnswersElements.some((el)=>el.checked);
     console.log("Current Question num:", currentQuestionNumber);
-    const isQuizFinished = currentQuestionNumber === 10;
+    const questionsAmount = questionsNumberPreference.textContent.length === 11 ? questionsNumberPreference.textContent.slice(0, 1) : questionsNumberPreference.textContent.slice(0, 2);
+    const isQuizFinished = currentQuestionNumber === Number(questionsAmount);
     if (!isQuizFinished && isAnswerChecked) {
         validateAnswerFromUser();
         fetchRandomQuestionFromDB();

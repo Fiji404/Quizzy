@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"8DZoZ":[function(require,module,exports) {
+})({"kGp80":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "3c3140f81e48e037";
+module.bundle.HMR_BUNDLE_ID = "9be706628b568835";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, importScripts */ /*::
 import type {
   HMRAsset,
@@ -502,133 +502,24 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"iXJ4r":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _flagsJson = require("../data/flags.json");
-var _flagsJsonDefault = parcelHelpers.interopDefault(_flagsJson);
-const startQuizBtn = document.querySelector(".intro-section__btn");
-const quizInterface = document.querySelector(".quiz-interface");
-const startQuizPanel = document.querySelector(".intro-section");
-const labelAnswersList = document.querySelectorAll(".answers-list__label");
-const inputAnswerElements = [
-    ...document.querySelectorAll(".answers-list__input")
-];
-const imgFlagElement = document.querySelector(".quiz-interface__flag-img");
-const nextQuestionBtn = document.querySelector(".quiz-interface__give-answer-btn");
-const incorrectAnswerNotyfication = document.querySelector(".quiz-interface__error");
-const currentQuestionElement = document.querySelector(".quiz-interface__question-number > output");
-const quizStatisticsDashboard = document.querySelector(".finished-quiz-result");
-const quizStatisticsCorrectAnswers = document.querySelector(".quiz-statistics__output_correct");
-const quizStatisticsBadAnswers = document.querySelector(".quiz-statistics__output_badly");
-const questionsNumberPreference = document.querySelector(".number-of-questions");
-let currentFlagName;
-let correctAnswersCounter = 0;
-let badAnswersCounter = 0;
-let currentQuestionNumber = 1;
-const getOneCorrectCountryName = ()=>{
-    const flagNameFromLabelElement = labelAnswersList[Math.trunc(Math.random() * 4)];
-    imgFlagElement.src = `https://countryflagsapi.com/svg/${flagNameFromLabelElement.textContent}`;
-    currentFlagName = flagNameFromLabelElement.textContent;
-};
-const getRandomCountryNames = ()=>{
-    const flagsListLength = Object.keys((0, _flagsJsonDefault.default)).length;
-    labelAnswersList.forEach((el)=>{
-        el.textContent = (0, _flagsJsonDefault.default)[Math.trunc(Math.random() * flagsListLength) + 1];
+},{}],"bZkrs":[function(require,module,exports) {
+const preferencesOptionList = document.querySelectorAll(".settings-options-list");
+const preferencesOptions = document.querySelectorAll(".settings-options-list__item");
+preferencesOptionList.forEach((listNode, idx)=>{
+    listNode.addEventListener("click", ({ target  })=>{
+        const childActiveClassElements = listNode.querySelectorAll(".active");
+        childActiveClassElements.forEach((el)=>el.classList.remove("active"));
+        target.classList.add("active");
+        localStorage.setItem("option" + idx, target.textContent);
     });
-    setTimeout(()=>{
-        quizInterface.classList.remove("active");
-    }, 1000);
-};
-const checkIfAnswerIsCorrect = ()=>{
-    quizInterface.classList.add("active");
-    inputAnswerElements.forEach((el)=>{
-        if (el.checked) {
-            const nextSiblingLabelElement = el.nextElementSibling;
-            if (nextSiblingLabelElement.textContent === currentFlagName) {
-                correctAnswersCounter++;
-                console.log(correctAnswersCounter);
-            } else if (nextSiblingLabelElement.textContent !== currentFlagName) {
-                badAnswersCounter++;
-                console.log(badAnswersCounter);
-            }
-        }
-        el.checked = false;
+});
+preferencesOptions.forEach((el)=>{
+    const localStorageValues = Object.values(localStorage);
+    localStorageValues.forEach((value)=>{
+        if (el.textContent === value) el.classList.add("active");
     });
-};
-const handleFinalPlayerScores = ()=>{
-    imgFlagElement.src = "#";
-    quizInterface.classList.remove("active");
-    quizStatisticsDashboard.classList.add("active");
-    quizStatisticsCorrectAnswers.textContent = correctAnswersCounter;
-    quizStatisticsBadAnswers.textContent = badAnswersCounter;
-};
-nextQuestionBtn.addEventListener("click", ()=>{
-    let questionsNumber = questionsNumberPreference.textContent;
-    const isAnyAnswerChecked = inputAnswerElements.some((el)=>el.checked);
-    const questionsAmount = questionsNumberPreference.textContent.length === 11 ? questionsNumberPreference.textContent.slice(0, 1) : questionsNumberPreference.textContent.slice(0, 2);
-    const isTheLastQuestion = currentQuestionNumber === Number(questionsAmount);
-    if (isAnyAnswerChecked && !isTheLastQuestion) {
-        incorrectAnswerNotyfication.textContent = "";
-        incorrectAnswerNotyfication.classList.remove("active");
-        currentQuestionNumber++;
-        currentQuestionElement.textContent = currentQuestionNumber;
-        checkIfAnswerIsCorrect();
-        getRandomCountryNames();
-        getOneCorrectCountryName();
-    } else if (isTheLastQuestion) handleFinalPlayerScores();
-    else {
-        incorrectAnswerNotyfication.textContent = "Please select at least one answer";
-        incorrectAnswerNotyfication.classList.add("active");
-    }
-});
-startQuizBtn.addEventListener("click", ()=>{
-    startQuizBtn.textContent = "";
-    startQuizBtn.classList.add("active");
-    setTimeout(()=>{
-        startQuizPanel.classList.add("hidden");
-    }, 2500);
-    setTimeout(()=>{
-        quizInterface.classList.remove("hidden");
-    }, 3500);
-});
-window.addEventListener("DOMContentLoaded", ()=>{
-    getRandomCountryNames();
-    getOneCorrectCountryName();
 });
 
-},{"../data/flags.json":"fbNpB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fbNpB":[function(require,module,exports) {
-module.exports = JSON.parse('{"1":"United Arab Emirates","2":"Andorra","3":"Afghanistan","4":"Antigua And Barbuda","5":"Anguilla","6":"Albania","7":"Armenia","8":"Angola","9":"Antarctica","10":"Argentina","11":"American Samoa","12":"Austria","13":"Australia","14":"Aruba","15":"\xe5land Islands","16":"Azerbaijan","17":"Bosnia And Herzegovina","18":"Barbados","19":"Bangladesh","20":"Belgium","21":"Burkina Faso","22":"Bulgaria","23":"Bahrain","24":"Burundi","25":"Benin","26":"Saint Barth\xe9lemy","27":"Bermuda","28":"Brunei Darussalam","29":"Bolivia","30":"Bonaire","31":"Brazil","32":"The Bahamas","33":"Bhutan","34":"Bouvet Island","35":"Botswana","36":"Belarus","37":"Belize","38":"Canada","39":"The Cocos Islands","40":"Democratic Republic Of Congo","41":"The Central African Republic","42":"Congo","43":"Switzerland","44":"C\xf4te D\'ivoire","45":"The Cook Islands","46":"Chile","47":"Cameroon","48":"China","49":"Colombia","50":"Costa Rica","51":"Cuba","52":"Cabo Verde","53":"Cura\xe7ao","54":"Christmas Island","55":"Cyprus","56":"Czechia","57":"Germany","58":"Djibouti","59":"Denmark","60":"Dominica","61":"Dominican Republic","62":"Algeria","63":"Ecuador","64":"Estonia","65":"Egypt","66":"Western Sahara","67":"Eritrea","68":"Spain","69":"Ethiopia","70":"European Union","71":"Finland","72":"Fiji","73":"The Falkland Islands","74":"The Federated States Of Micronesia","75":"The Faroe Islands","76":"France","77":"Gabon","78":"England","79":"Northern Ireland","80":"Scotland","81":"Wales","82":"The United Kingdom Of Great Britain And Northern Ireland","83":"Grenada","84":"Georgia","85":"French Guiana","86":"Guernsey","87":"Ghana","88":"Gibraltar","89":"Greenland","90":"Gambia","91":"Guinea","92":"Guadeloupe","93":"Equatorial Guinea","94":"Greece","95":"South Georgia And The South Sandwich Islands","96":"Guatemala","97":"Guam","98":"Guinea-bissau","99":"Guyana","100":"Hong Kong","101":"Heard Island And Mcdonald Islands","102":"Honduras","103":"Croatia","104":"Haiti","105":"Hungary","106":"Indonesia","107":"Ireland","108":"Israel","109":"Isle Of Man","110":"India","111":"The British Indian Ocean Territory","112":"Iraq","113":"Iran","114":"Iceland","115":"Italy","116":"Jersey","117":"Jamaica","118":"Jordan","119":"Japan","120":"Kenya","121":"Kyrgyzstan","122":"Cambodia","123":"Kiribati","124":"The Comoros","125":"Saint Kitts And Nevis","126":"The Democratic People\'s Republic Of Korea","127":"The Republic Of Korea","128":"Kuwait","129":"The Cayman Islands","130":"Kazakhstan","131":"The Lao People\'s Democratic Republic","132":"Lebanon","133":"Saint Lucia","134":"Liechtenstein","135":"Sri Lanka","136":"Liberia","137":"Lesotho","138":"Lithuania","139":"Luxembourg","140":"Latvia","141":"Libya","142":"Morocco","143":"Monaco","144":"The Republic Of Moldova","145":"Montenegro","146":"Saint Martin","147":"Madagascar","148":"The Marshall Islands","149":"Republic Of North Macedonia","150":"Mali","151":"Myanmar","152":"Mongolia","153":"Macao","154":"The Northern Mariana Islands","155":"Martinique","156":"Mauritania","157":"Montserrat","158":"Malta","159":"Mauritius","160":"Maldives","161":"Malawi","162":"Mexico","163":"Malaysia","164":"Mozambique","165":"Namibia","166":"New Caledonia","167":"Niger","168":"Norfolk Island","169":"Nigeria","170":"Nicaragua","171":"Netherlands","172":"Norway","173":"Nepal","174":"Nauru","175":"Niue","176":"New Zealand","177":"Oman","178":"Panama","179":"Peru","180":"French Polynesia","181":"Papua New Guinea","182":"Philippines","183":"Pakistan","184":"Poland","185":"Saint Pierre And Miquelon","186":"Pitcairn","187":"Puerto Rico","188":"Palestine","189":"Portugal","190":"Palau","191":"Paraguay","192":"Qatar","193":"R\xe9union","194":"Romania","195":"Serbia","196":"Russian Federation","197":"Rwanda","198":"Saudi Arabia","199":"Solomon Islands","200":"Seychelles","201":"Sudan","202":"Sweden","203":"Singapore","204":"Saint Helena","205":"Slovenia","206":"Svalbard And Jan Mayen","207":"Slovakia","208":"Sierra Leone","209":"San Marino","210":"Senegal","211":"Somalia","212":"Suriname","213":"South Sudan","214":"Sao Tome And Principe","215":"El Salvador","216":"Sint Maarten","217":"Syrian Arab Republic","218":"Eswatini","219":"The Turks And Caicos Islands","220":"Chad","221":"The French Southern Territories","222":"Togo","223":"Thailand","224":"Tajikistan","225":"Tokelau","226":"Timor-leste","227":"Turkmenistan","228":"Tunisia","229":"Tonga","230":"Turkey","231":"Trinidad And Tobago","232":"Tuvalu","233":"Taiwan","234":"United Republic Of Tanzania","235":"Ukraine","236":"Uganda","237":"The United States Minor Outlying Islands","238":"The United States Of America","239":"Uruguay","240":"Uzbekistan","241":"The Holy See","242":"Saint Vincent And The Grenadines","243":"Venezuela","244":"British Virgin Islands","245":"Us Virgin Islands","246":"Viet Nam","247":"Vanuatu","248":"Wallis And Futuna","249":"Samoa","250":"Kosovo","251":"Yemen","252":"Mayotte","253":"South Africa","254":"Zambia","255":"Zimbabwe"}');
+},{}]},["kGp80","bZkrs"], "bZkrs", "parcelRequiree238")
 
-},{}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}]},["8DZoZ","iXJ4r"], "iXJ4r", "parcelRequiree238")
-
-//# sourceMappingURL=Flags-Quiz.1e48e037.js.map
+//# sourceMappingURL=Flags-Quiz.8b568835.js.map

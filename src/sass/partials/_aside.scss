@@ -1,0 +1,91 @@
+@use './colors';
+@use './mixins';
+.quiz-settings {
+    position: absolute;
+    top: 1rem;
+    right: -400px;
+    background-color: colors.$nav;
+    padding: 1rem;
+    border-radius: .4rem;
+    border: 2px solid lighten(colors.$nav, 20);
+    gap: .5rem;
+    height: 50vh;
+    width: min(90%, 350px);
+    transition: right 200ms;
+    overflow: hidden auto;
+    @include mixins.scrollStyle;
+    &_false {
+        color: colors.$transparent-red; 
+    }
+    > section:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+    &.active {
+        right: 1.5rem;
+    }
+    &__expand-btn,
+    &__collapse-btn {
+        background-color: transparent;
+        border: none;
+        color: colors.$green;
+        font-size: 1.4rem;
+        margin-right: .4rem;
+        cursor: pointer;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        transition: background-color 100ms;
+        &:hover {
+            background-color: lighten(colors.$nav, 10);
+        }
+    }
+    &__collapse-btn {
+        color: colors.$light-red;
+        display: none;
+    }
+    &__expand-btn.active {
+        display: none;
+    }
+    &__expand-btn.active + &__collapse-btn {
+        display: inline-block;
+    }
+    &__title {
+        color: colors.$white;
+        font-size: 1.4rem;
+    }
+    .settings-options-list {
+        list-style: none;
+        transition: transform 200ms;
+        transform: scaleY(1);
+        transform-origin: top;
+        &.hidden {
+            transform: scaleY(0);
+            height: 0;
+            overflow: hidden;
+        }
+        &__item {
+            font-size: 1.3rem;
+            padding: .4rem;
+            border-radius: .4rem;
+            &.active {
+                background-color: lighten(colors.$nav, 20);
+            }
+            @for $i from 1 through 4 {
+                &:nth-child(#{$i}) {
+                    color: lighten(colors.$darker-orange, $i * 10);
+                }
+            }
+            &:hover {
+                background-color: lighten(colors.$nav, 10);
+                cursor: pointer;
+            }
+            > span {
+                display: inline-block;
+                width: 20px;
+                text-align: center;
+                margin-right: .5rem;
+                color: colors.$white;
+            }
+        }
+    }
+}

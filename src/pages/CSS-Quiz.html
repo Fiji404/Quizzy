@@ -8,15 +8,19 @@
         <script defer type="module" src="../scripts/quiz.js">
             module;
         </script>
+        <script type="module" defer src="../scripts/quizPreferences.js">module;</script>
+        <script src="https://kit.fontawesome.com/753d009a2f.js" crossorigin="anonymous"></script>
         <link rel="icon" href="../icons/css3-icon.svg" />
         <title>CSS Quiz</title>
     </head>
     <body data-quiz-name="CSS">
         <nav class="nav">
             <header>
-                <h1 class="nav__page-title">Quizzy</h1>
+                <a class="nav__back-to-home-link" href="/">
+                    <h1 class="nav__page-title">Quizzy</h1>
+                </a>
             </header>
-            <a href="/" class="nav__change-quiz-btn">Back to Quizes</a>
+            <button class="nav__change-quiz-btn">Quiz preferences</button>
         </nav>
         <main class="quiz-container">
             <header class="intro-section">
@@ -26,7 +30,7 @@
             </header>
             <section class="quiz-interface hidden">
                 <header>
-                    <p class="quiz-interface__question-number">Question <output>1</output> of 10 questions</p>
+                    <p class="quiz-interface__question-number">Question <output>1</output> of <output class="number-of-questions">15 questions</output></p>
                     <h2 aria-label="question to answer" class="quiz-interface__question"></h2>
                 </header>
                 <ul class="answers-list">
@@ -79,6 +83,51 @@
                     </div>
                 </section>
             </section>
+            <aside class="quiz-settings">
+                <section>
+                    <header>
+                        <h2 class="quiz-settings__title">
+                            <button aria-label="plus icon for expand list choices" class="quiz-settings__expand-btn">
+                                <i class="fa-solid fa-plus"></i></button
+                            ><button aria-label="minus icon for collapse list choices" class="quiz-settings__collapse-btn"><i class="fa-solid fa-minus"></i></button>Number of questions
+                        </h2>
+                    </header>
+                    <ul class="settings-options-list hidden">
+                        <li class="settings-options-list__item"><span>5</span> questions</li>
+                        <li class="settings-options-list__item"><span>10</span> questions</li>
+                        <li class="settings-options-list__item"><span>15</span> questions</li>
+                        <li class="settings-options-list__item"><span>20</span> questions</li>
+                    </ul>
+                </section>
+                <section>
+                    <header>
+                        <h2 class="quiz-settings__title">
+                            <button aria-label="plus icon for expand list choices" class="quiz-settings__expand-btn">
+                                <i class="fa-solid fa-plus"></i></button
+                            ><button aria-label="minus icon for collapse list choices" class="quiz-settings__collapse-btn"><i class="fa-solid fa-minus"></i></button>Hints status
+                        </h2>
+                    </header>
+                    <ul class="settings-options-list hidden">
+                        <li class="settings-options-list__item">True</li>
+                        <li class="settings-options-list__item">False</li>
+                    </ul>
+                </section>
+                <section>
+                    <header>
+                        <h2 class="quiz-settings__title">
+                            <button aria-label="plus icon for expand list choices" class="quiz-settings__expand-btn">
+                                <i class="fa-solid fa-plus"></i></button
+                            ><button aria-label="minus icon for collapse list choices" class="quiz-settings__collapse-btn"><i class="fa-solid fa-minus"></i></button>Time for question
+                        </h2>
+                    </header>
+                    <ul class="settings-options-list hidden">
+                        <li class="settings-options-list__item"><span>5</span> seconds</li>
+                        <li class="settings-options-list__item"><span>10</span> seconds</li>
+                        <li class="settings-options-list__item"><span>15</span> seconds</li>
+                        <li class="settings-options-list__item"><span>20</span> seconds</li>
+                    </ul>
+                </section>
+            </aside>
         </main>
     </body>
 </html>

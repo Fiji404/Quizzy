@@ -1,5 +1,6 @@
 @use 'partials/navigation';
 @use 'partials/colors';
+@use 'partials/mixins';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
 
 *,
@@ -12,6 +13,7 @@
 
 html {
     scroll-padding-top: 5rem;
+    @include mixins.scrollStyle;
 }
 
 body {
@@ -39,20 +41,6 @@ body {
             user-select: none;
         }
     }
-}
-
-html::-webkit-scrollbar {
-    width: 20px;
-}
-
-html::-webkit-scrollbar-thumb {
-    border: 5px solid lighten(colors.$bg, 5);
-    background-color: darken(colors.$white, 30);
-    border-radius: 2rem;
-}
-
-html::-webkit-scrollbar-track {
-    background-color: lighten(colors.$bg, 5);
 }
 
 .main-content {
@@ -199,17 +187,25 @@ html::-webkit-scrollbar-track {
 }
 
 .available-quizes {
+    margin-bottom: 2rem;
     &__title {
         font-size: clamp(1.2rem, 1.3vw + .5rem, 2.2rem);
         margin-bottom: 1rem;
+        text-align: center;
     }
     &__list {
+        padding: .5rem 0;
         list-style: none;
-        display: flex;
-        flex-wrap: wrap;
         gap: 1.5rem;
+        overflow-x: auto;
+        @include mixins.scrollStyle;
+        white-space: nowrap;
+        background-color: darken(colors.$nav, 10);
+        border-radius: .4rem;
     }
     &__quiz {
+        display: inline-block;
+        white-space: nowrap;
         padding: .5rem 1rem;
         background-color: colors.$nav;
         border-radius: .4rem;
@@ -217,6 +213,7 @@ html::-webkit-scrollbar-track {
         border: 2px solid lighten(colors.$nav, 20);
         cursor: default;
         transition: background-color 100ms;
+        margin-inline: .5rem;
         &:hover {
             background-color: lighten(colors.$nav, 5);
         }

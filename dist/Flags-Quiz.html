@@ -1,88 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS-Quiz.22cea730.css">
-    <script defer="" src="/Flags-Quiz.1e48e037.js">module;
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/CSS-Quiz.22cea730.css">
+        <script defer="" src="/Flags-Quiz.1e48e037.js">module;
 
 </script>
-    <title>Flags Quiz</title>
-</head>
-<body>
-    <nav class="nav">
-        <header>
-            <a class="nav__back-to-home-link" href="/">
-                <h1 class="nav__page-title">Quizzy</h1>
-            </a>
-        </header>
-        <button class="nav__change-quiz-btn">Quiz preferences</button>
-    </nav>
-    <main class="quiz-container">
-        <article>
-            <header class="intro-section">
-                <h2 class="intro-section__title">You choose the Flag Quiz !</h2>
-                <p class="intro-section__desc">Click button below to begin</p>
-                <button class="intro-section__btn">Start quiz</button>
+        <script src="https://kit.fontawesome.com/753d009a2f.js" crossorigin="anonymous"></script>
+        <script defer="" src="/CSS-Quiz.8b568835.js">module;
+
+</script>
+        <title>Flags Quiz</title>
+    </head>
+    <body>
+        <nav class="nav">
+            <header>
+                <a class="nav__back-to-home-link" href="/">
+                    <h1 class="nav__page-title">Quizzy</h1>
+                </a>
             </header>
-            <section class="quiz-interface">
-                <header>
-                    <p class="quiz-interface__question-number">Question <output>1</output> of 15 questions</p>
-                    <h2 class="intro-section__title">What is this flag ?</h2>
-                    <img class="quiz-interface__flag-img" src="https://countryflagsapi.com/svg/United Arab Emirates" alt="">
+            <button class="nav__change-quiz-btn">Quiz preferences</button>
+        </nav>
+        <main class="quiz-container">
+            <article>
+                <header class="intro-section">
+                    <h2 class="intro-section__title">You choose the Flag Quiz !</h2>
+                    <p class="intro-section__desc">Click button below to begin</p>
+                    <button class="intro-section__btn">Start quiz</button>
                 </header>
-                <ul class="answers-list">
-                    <li class="answers-list__item">
-                        <p class="answers-list__question-number">a:</p>
-                        <input class="answers-list__input" id="first-answer" name="quiz-answer" type="radio">
-                        <label aria-label="Answer 1 to question" class="answers-list__label" for="first-answer"></label>
-                    </li>
-                    <li class="answers-list__item">
-                        <p class="answers-list__question-number">b:</p>
-                        <input class="answers-list__input" id="second-answer" name="quiz-answer" type="radio">
-                        <label aria-label="Answer 2 to question" class="answers-list__label" for="second-answer"></label>
-                    </li>
-                    <li class="answers-list__item">
-                        <p class="answers-list__question-number">c:</p>
-                        <input class="answers-list__input" id="third-answer" name="quiz-answer" type="radio">
-                        <label aria-label="Answer 3 to question" class="answers-list__label" for="third-answer"></label>
-                    </li>
-                    <li class="answers-list__item">
-                        <p class="answers-list__question-number">d:</p>
-                        <input class="answers-list__input" id="fourth-answer" name="quiz-answer" type="radio">
-                        <label aria-label="Answer 4 to question" class="answers-list__label" for="fourth-answer"></label>
-                    </li>
-                </ul>
-                <p aria-label="Notyfication about blank provided answer" class="quiz-interface__error"></p>
-                <button class="quiz-interface__give-answer-btn" type="button">Next question</button>
-                <section class="finished-quiz-result">
+                <section class="quiz-interface">
                     <header>
-                        <h2 class="finished-quiz-result__title">Quiz Results:</h2>
+                        <p class="quiz-interface__question-number">Question <output>1</output> of <output class="number-of-questions">15 questions</output></p>
+                        <h2 class="intro-section__title">What is this flag ?</h2>
+                        <img class="quiz-interface__flag-img" src="https://countryflagsapi.com/svg/United Arab Emirates" alt="">
                     </header>
-                    <div class="quiz-statistics">
-                        <section class="quiz-statistics__col">
-                            <header>
-                                <h2 class="quiz-statistics__info">You're correct answers is:</h2>
-                                <output aria-label="correct answers output" class="quiz-statistics__output quiz-statistics__output_correct"></output>
-                            </header>
-                            <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn">
-                                Look correct answers details
-                            </button>
-                        </section>
-                        <section class="quiz-statistics__col">
-                            <header>
-                                <h2 class="quiz-statistics__info">You're badly answers is:</h2>
-                                <output aria-label="bad answers output" class="quiz-statistics__output quiz-statistics__output_badly"></output>
-                            </header>
-                            <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn_badly">
-                                Look bad answers details
-                            </button>
-                        </section>
-                    </div>
+                    <ul class="answers-list">
+                        <li class="answers-list__item">
+                            <p class="answers-list__question-number">a:</p>
+                            <input class="answers-list__input" id="first-answer" name="quiz-answer" type="radio">
+                            <label aria-label="Answer 1 to question" class="answers-list__label" for="first-answer"></label>
+                        </li>
+                        <li class="answers-list__item">
+                            <p class="answers-list__question-number">b:</p>
+                            <input class="answers-list__input" id="second-answer" name="quiz-answer" type="radio">
+                            <label aria-label="Answer 2 to question" class="answers-list__label" for="second-answer"></label>
+                        </li>
+                        <li class="answers-list__item">
+                            <p class="answers-list__question-number">c:</p>
+                            <input class="answers-list__input" id="third-answer" name="quiz-answer" type="radio">
+                            <label aria-label="Answer 3 to question" class="answers-list__label" for="third-answer"></label>
+                        </li>
+                        <li class="answers-list__item">
+                            <p class="answers-list__question-number">d:</p>
+                            <input class="answers-list__input" id="fourth-answer" name="quiz-answer" type="radio">
+                            <label aria-label="Answer 4 to question" class="answers-list__label" for="fourth-answer"></label>
+                        </li>
+                    </ul>
+                    <p aria-label="Notyfication about blank provided answer" class="quiz-interface__error"></p>
+                    <button class="quiz-interface__give-answer-btn" type="button">Next question</button>
+                    <section class="finished-quiz-result">
+                        <header>
+                            <h2 class="finished-quiz-result__title">Quiz Results:</h2>
+                        </header>
+                        <div class="quiz-statistics">
+                            <section class="quiz-statistics__col">
+                                <header>
+                                    <h2 class="quiz-statistics__info">You're correct answers is:</h2>
+                                    <output aria-label="correct answers output" class="quiz-statistics__output quiz-statistics__output_correct"></output>
+                                </header>
+                                <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn">
+                                    Look correct answers details
+                                </button>
+                            </section>
+                            <section class="quiz-statistics__col">
+                                <header>
+                                    <h2 class="quiz-statistics__info">You're badly answers is:</h2>
+                                    <output aria-label="bad answers output" class="quiz-statistics__output quiz-statistics__output_badly"></output>
+                                </header>
+                                <button class="quiz-statistics__view-answer-btn quiz-statistics__view-answer-btn_badly">
+                                    Look bad answers details
+                                </button>
+                            </section>
+                        </div>
+                    </section>
                 </section>
-            </section>
-        </article>
-    </main>
-</body>
+            </article>
+            <aside class="quiz-settings">
+                <section>
+                    <header>
+                        <h2 class="quiz-settings__title">
+                            <button aria-label="plus icon for expand list choices" class="quiz-settings__expand-btn">
+                                <i class="fa-solid fa-plus"></i></button><button aria-label="minus icon for collapse list choices" class="quiz-settings__collapse-btn"><i class="fa-solid fa-minus"></i></button>Number of questions
+                        </h2>
+                    </header>
+                    <ul class="settings-options-list hidden">
+                        <li class="settings-options-list__item"><span>5</span> questions</li>
+                        <li class="settings-options-list__item"><span>10</span> questions</li>
+                        <li class="settings-options-list__item"><span>15</span> questions</li>
+                        <li class="settings-options-list__item"><span>20</span> questions</li>
+                    </ul>
+                </section>
+                <section>
+                    <header>
+                        <h2 class="quiz-settings__title">
+                            <button aria-label="plus icon for expand list choices" class="quiz-settings__expand-btn">
+                                <i class="fa-solid fa-plus"></i></button><button aria-label="minus icon for collapse list choices" class="quiz-settings__collapse-btn"><i class="fa-solid fa-minus"></i></button>Hints status
+                        </h2>
+                    </header>
+                    <ul class="settings-options-list hidden">
+                        <li class="settings-options-list__item">True</li>
+                        <li class="settings-options-list__item">False</li>
+                    </ul>
+                </section>
+                <section>
+                    <header>
+                        <h2 class="quiz-settings__title">
+                            <button aria-label="plus icon for expand list choices" class="quiz-settings__expand-btn">
+                                <i class="fa-solid fa-plus"></i></button><button aria-label="minus icon for collapse list choices" class="quiz-settings__collapse-btn"><i class="fa-solid fa-minus"></i></button>Time for question
+                        </h2>
+                    </header>
+                    <ul class="settings-options-list hidden">
+                        <li class="settings-options-list__item"><span>5</span> seconds</li>
+                        <li class="settings-options-list__item"><span>10</span> seconds</li>
+                        <li class="settings-options-list__item"><span>15</span> seconds</li>
+                        <li class="settings-options-list__item"><span>20</span> seconds</li>
+                    </ul>
+                </section>
+            </aside>
+        </main>
+    </body>
 </html>
