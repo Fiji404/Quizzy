@@ -27,7 +27,8 @@ const incorrectAnswerNotyfication = document.querySelector('.quiz-interface__err
 const quizStatisticsDashboard = document.querySelector('.finished-quiz-result');
 const quizStatisticsCorrectAnswers = document.querySelector('.quiz-statistics__output_correct');
 const quizStatisticsBadAnswers = document.querySelector('.quiz-statistics__output_badly');
-const questionsNumberPreference = document.querySelector('.number-of-questions')
+const questionsNumberPreference = document.querySelector('.number-of-questions');
+const resultInfoTitle = document.querySelector('.quiz-statistics__result-info');
 let currentQuestionNumber = 1;
 let correctAnswersCounter = 0;
 let badAnswersCounter = 0;
@@ -36,15 +37,18 @@ const queriedQuestionsArray = [];
 const quizName = document.body.dataset.quizName;
 
 const fetchRandomQuestionFromDB = () => {
-    quizInterface.classList.add('active')
-    randomQuestionId = Math.trunc(Math.random() * 20) + 1;
-    randomQuestionId = checkIsQuestionWasDrawn(randomQuestionId);
-    get(child(dbRef, `Quizes/${quizName}/Questions/Question${randomQuestionId}`)).then(snapshot => {
-        if (snapshot.exists()) {
-            quizInterfaceQuestion.textContent = snapshot.val();
-        }
-    });
-    fetchAvailableAnswersOfQuestionFromDB()
+    const questionsAmount = questionsNumberPreference.textContent.length === 11 ? questionsNumberPreference.textContent.slice(0, 1) : questionsNumberPreference.textContent.slice(0, 2)
+    if (!(currentQuestionNumber === Number(questionsAmount) + 1)) {
+        quizInterface.classList.add('active');
+        randomQuestionId = Math.trunc(Math.random() * 20) + 1;
+        randomQuestionId = checkIsQuestionWasDrawn(randomQuestionId);
+        get(child(dbRef, `Quizes/${quizName}/Questions/Question${randomQuestionId}`)).then(snapshot => {
+            if (snapshot.exists()) {
+                quizInterfaceQuestion.textContent = snapshot.val();
+            }
+        });
+        fetchAvailableAnswersOfQuestionFromDB();
+    }
 };
 
 const checkIsQuestionWasDrawn = questionID => {
@@ -59,8 +63,6 @@ const checkIsQuestionWasDrawn = questionID => {
     return questionID;
 };
 
-
-
 const fetchAvailableAnswersOfQuestionFromDB = () => {
     get(child(dbRef, `Quizes/${quizName}/Answers/Question${randomQuestionId}Answers`)).then(snapshot => {
         quizInterface.classList.remove('active');
@@ -74,29 +76,29 @@ const fetchAvailableAnswersOfQuestionFromDB = () => {
 };
 
 const validateAnswerFromUser = () => {
-    if (currentQuestionNumber === 10) {
+    const questionsAmount = questionsNumberPreference.textContent.length === 11 ? questionsNumberPreference.textContent.slice(0, 1) : questionsNumberPreference.textContent.slice(0, 2)
+    if (currentQuestionNumber === Number(questionsAmount)) {
         nextQuestionBtn.textContent = 'Finish quiz';
     }
-        inputAnswersElements.forEach(el => {
-            let nextSiblingLabelElementOfInput;
-            if (el.checked) nextSiblingLabelElementOfInput = el.nextElementSibling.textContent;
-            get(child(dbRef, `Quizes/${quizName}/correctAnswers/Question${randomQuestionId}Answer`)).then(snapshot => {
-                if (snapshot.exists()) {
-                    if (snapshot.val() === nextSiblingLabelElementOfInput) {
-                        correctAnswersCounter++;
-                        console.log('Correct:', correctAnswersCounter);
-                    } else if (nextSiblingLabelElementOfInput !== snapshot.val() && el.checked) {
-                        badAnswersCounter++;
-                        console.log('Bad:', badAnswersCounter);
-                    }
-                    el.checked = false
-                } else {
-                    console.log('no data');
+    inputAnswersElements.forEach(el => {
+        let nextSiblingLabelElementOfInput;
+        if (el.checked) nextSiblingLabelElementOfInput = el.nextElementSibling.textContent;
+        get(child(dbRef, `Quizes/${quizName}/correctAnswers/Question${randomQuestionId}Answer`)).then(snapshot => {
+            if (snapshot.exists()) {
+                if (snapshot.val() === nextSiblingLabelElementOfInput) {
+                    correctAnswersCounter++;
+                    console.log('Correct:', correctAnswersCounter);
+                } else if (nextSiblingLabelElementOfInput !== snapshot.val() && el.checked) {
+                    badAnswersCounter++;
+                    console.log('Bad:', badAnswersCounter);
                 }
-            });
+                el.checked = false;
+            }
         });
-    currentQuestionNumber++;
-    currentQuestionElement.textContent = currentQuestionNumber;
+    });
+    if (currentQuestionNumber === Number(questionsAmount) + 1) {
+        handleFinalPlayerScores();
+    }
 };
 
 const handleFinalPlayerScores = () => {
@@ -104,15 +106,25 @@ const handleFinalPlayerScores = () => {
     quizStatisticsDashboard.classList.add('active');
     quizStatisticsCorrectAnswers.textContent = correctAnswersCounter;
     quizStatisticsBadAnswers.textContent = badAnswersCounter;
+    if (correctAnswersCounter > badAnswersCounter) {
+        resultInfoTitle.classList.add('quiz-statistics__result-info_good');
+        resultInfoTitle.textContent = 'Congratulations, you have answered most of the questions correctly !'
+    } else if (correctAnswersCounter < badAnswersCounter) {
+        resultInfoTitle.classList.add('quiz-statistics__result-info_bad');
+        resultInfoTitle.textContent = 'Please try again, your answers was incorrect.'
+    }
 };
-
 
 nextQuestionBtn.addEventListener('click', () => {
     const isAnswerChecked = inputAnswersElements.some(el => el.checked);
-    console.log('Current Question num:', currentQuestionNumber)
-    const questionsAmount = questionsNumberPreference.textContent.length === 11 ? questionsNumberPreference.textContent.slice(0, 1) : questionsNumberPreference.textContent.slice(0, 2)
-    const isQuizFinished = currentQuestionNumber === Number(questionsAmount);
-    if (!isQuizFinished && isAnswerChecked) {
+    console.log('Current Question num:', currentQuestionNumber);
+    const questionsAmount =
+        questionsNumberPreference.textContent.length === 11
+            ? questionsNumberPreference.textContent.slice(0, 1)
+            : questionsNumberPreference.textContent.slice(0, 2);
+    if (isAnswerChecked) {
+        currentQuestionNumber++
+        currentQuestionElement.textContent = currentQuestionNumber;
         validateAnswerFromUser();
         fetchRandomQuestionFromDB();
         incorrectAnswerNotyfication.textContent = '';
@@ -120,10 +132,7 @@ nextQuestionBtn.addEventListener('click', () => {
     } else if (!isAnswerChecked) {
         incorrectAnswerNotyfication.textContent = 'Please select at least one answer';
         incorrectAnswerNotyfication.classList.add('active');
-    } else if (isQuizFinished) {
-        validateAnswerFromUser()
-        handleFinalPlayerScores();
-    } 
+    }
 });
 
 window.addEventListener('DOMContentLoaded', () => {

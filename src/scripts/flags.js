@@ -1,3 +1,4 @@
+'use strict';
 import flagsList from '../data/flags.json';
 
 const startQuizBtn = document.querySelector('.intro-section__btn');
@@ -12,16 +13,20 @@ const currentQuestionElement = document.querySelector('.quiz-interface__question
 const quizStatisticsDashboard = document.querySelector('.finished-quiz-result');
 const quizStatisticsCorrectAnswers = document.querySelector('.quiz-statistics__output_correct');
 const quizStatisticsBadAnswers = document.querySelector('.quiz-statistics__output_badly');
-const questionsNumberPreference = document.querySelector('.number-of-questions')
+const resultInfoTitle = document.querySelector('.quiz-statistics__result-info');
+const questionsNumberPreference = document.querySelector('.number-of-questions');
 let currentFlagName;
 let correctAnswersCounter = 0;
 let badAnswersCounter = 0;
 let currentQuestionNumber = 1;
 
 const getOneCorrectCountryName = () => {
-    const flagNameFromLabelElement = labelAnswersList[Math.trunc(Math.random() * 4)];
-    imgFlagElement.src = `https://countryflagsapi.com/svg/${flagNameFromLabelElement.textContent}`;
-    currentFlagName = flagNameFromLabelElement.textContent;
+    const questionsAmount = questionsNumberPreference.textContent.length === 11 ? questionsNumberPreference.textContent.slice(0, 1) : questionsNumberPreference.textContent.slice(0, 2)
+    if (!(currentQuestionNumber === Number(questionsAmount) + 1)) {
+        const flagNameFromLabelElement = labelAnswersList[Math.trunc(Math.random() * 4)];
+        imgFlagElement.src = `https://countryflagsapi.com/svg/${flagNameFromLabelElement.textContent}`;
+        currentFlagName = flagNameFromLabelElement.textContent;
+    }
 };
 
 const getRandomCountryNames = () => {
@@ -41,30 +46,38 @@ const checkIfAnswerIsCorrect = () => {
             const nextSiblingLabelElement = el.nextElementSibling;
             if (nextSiblingLabelElement.textContent === currentFlagName) {
                 correctAnswersCounter++;
-                console.log(correctAnswersCounter);
+                console.log('Correct answer', correctAnswersCounter);
             } else if (nextSiblingLabelElement.textContent !== currentFlagName) {
                 badAnswersCounter++;
-                console.log(badAnswersCounter);
+                console.log('Bad answer',badAnswersCounter);
             }
+        }
+        const questionsAmount = questionsNumberPreference.textContent.length === 11 ? questionsNumberPreference.textContent.slice(0, 1) : questionsNumberPreference.textContent.slice(0, 2)
+        if (currentQuestionNumber === Number(questionsAmount) + 1) {
+            handleFinalPlayerScores();
         }
         el.checked = false;
     });
 };
 
 const handleFinalPlayerScores = () => {
-    imgFlagElement.src = '#';
     quizInterface.classList.remove('active');
     quizStatisticsDashboard.classList.add('active');
+    if (correctAnswersCounter > badAnswersCounter) {
+        resultInfoTitle.classList.add('quiz-statistics__result-info_good');
+        resultInfoTitle.textContent = 'Congratulations, you have answered most of the questions correctly !'
+    } else if (correctAnswersCounter < badAnswersCounter) {
+        resultInfoTitle.classList.add('quiz-statistics__result-info_bad');
+        resultInfoTitle.textContent = 'Please try again, your answers was incorrect.'
+    }
+    imgFlagElement.src = '#';
     quizStatisticsCorrectAnswers.textContent = correctAnswersCounter;
     quizStatisticsBadAnswers.textContent = badAnswersCounter;
 };
 
 nextQuestionBtn.addEventListener('click', () => {
-    let questionsNumber = questionsNumberPreference.textContent;
     const isAnyAnswerChecked = inputAnswerElements.some(el => el.checked);
-    const questionsAmount = questionsNumberPreference.textContent.length === 11 ? questionsNumberPreference.textContent.slice(0, 1) : questionsNumberPreference.textContent.slice(0, 2)
-    const isTheLastQuestion = currentQuestionNumber === Number(questionsAmount);
-    if (isAnyAnswerChecked && !isTheLastQuestion) {
+    if (isAnyAnswerChecked) {
         incorrectAnswerNotyfication.textContent = '';
         incorrectAnswerNotyfication.classList.remove('active');
         currentQuestionNumber++;
@@ -72,10 +85,8 @@ nextQuestionBtn.addEventListener('click', () => {
         checkIfAnswerIsCorrect();
         getRandomCountryNames();
         getOneCorrectCountryName();
-    } else if (isTheLastQuestion) {
-        handleFinalPlayerScores();
     } else {
-        incorrectAnswerNotyfication.textContent = 'Please select at least one answer';
+        incorrectAnswerNotyfication.textContent = 'Please select any answer !';
         incorrectAnswerNotyfication.classList.add('active');
     }
 });

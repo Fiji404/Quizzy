@@ -5,20 +5,45 @@
     top: 1rem;
     right: -400px;
     background-color: colors.$nav;
-    padding: 1rem;
     border-radius: .4rem;
     border: 2px solid lighten(colors.$nav, 20);
-    gap: .5rem;
     height: 50vh;
     width: min(90%, 350px);
     transition: right 200ms;
-    overflow: hidden auto;
-    @include mixins.scrollStyle;
+    &_apply-changes-btn {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: transparent;
+        border: none;
+        transform: translate(-50%, -50%);
+        color: darken(colors.$green, 5);
+        font-size: 1.5rem;
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+        &.active {
+            pointer-events: auto;
+            animation: blinking 800ms linear infinite alternate;
+        }
+        @keyframes blinking {
+            to {
+                opacity: 1;
+                transform: scale(1.05) translate(-50%, -50%);
+            }
+        }
+    }
     &_false {
         color: colors.$transparent-red; 
     }
-    > section:not(:last-child) {
-        margin-bottom: 1rem;
+    &__content {
+        @include mixins.scrollStyle;
+        height: 100%;
+        padding: 1rem;
+        overflow: hidden auto;
+        > section:not(:last-child) {
+            margin-bottom: 1rem;
+        }
     }
     &.active {
         right: 1.5rem;

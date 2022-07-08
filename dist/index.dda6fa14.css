@@ -133,7 +133,7 @@ body.not-interactive:before {
 }
 
 .overview-intro {
-  min-height: 100vh;
+  min-height: 90vh;
   scroll-snap-align: center;
 }
 
@@ -281,8 +281,8 @@ body.not-interactive:before {
   text-align: center;
   text-transform: capitalize;
   color: #07f;
-  margin-bottom: 1.5rem;
-  font-size: clamp(1.4rem, 1.4vw + .7rem, 2.5rem);
+  margin: 1.5rem 0;
+  font-size: clamp(2rem, 1.4vw + .7rem, 2.5rem);
 }
 
 .available-quizes {
@@ -292,11 +292,12 @@ body.not-interactive:before {
 .available-quizes__title {
   text-align: center;
   margin-bottom: 1rem;
-  font-size: clamp(1.2rem, 1.3vw + .5rem, 2.2rem);
+  font-size: clamp(1.4rem, 1.3vw + .5rem, 2.2rem);
 }
 
 .available-quizes__list {
   white-space: nowrap;
+  scroll-snap-type: x mandatory;
   background-color: #292929;
   border-radius: .4rem;
   gap: 1.5rem;
@@ -320,6 +321,7 @@ body.not-interactive:before {
 }
 
 .available-quizes__quiz {
+  scroll-snap-align: start;
   white-space: nowrap;
   cursor: default;
   background-color: #424242;
