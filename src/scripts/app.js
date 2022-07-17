@@ -1,6 +1,6 @@
 'use strict';
 const expandQuizzesListBtn = document.querySelector('.nav__change-quiz-btn');
-const backFromQuizesBtn = document.querySelector('.nav__back-from-quizes');
+const backFromQuizesBtn = document.querySelector('.reject-from-choosing-quiz-btn');
 const quizesContainer = document.querySelector('.available-quizzes-grid');
 const quizesSections = document.querySelectorAll('.quiz-figure');
 const redirectNotyfication = document.querySelector('.redirect-notification');

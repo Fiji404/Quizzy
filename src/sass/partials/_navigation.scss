@@ -2,11 +2,10 @@
 .nav {
     padding: 1rem 2rem;
     display: flex;
-    color: colors.$white;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 1.2rem;
     background-color: colors.$transparent-nav;
     backdrop-filter: blur(5px);
     position: sticky;
@@ -15,43 +14,20 @@
     &__back-to-home-link {
         text-decoration: none;
     }
-    &__back-from-quizes {
-        position: fixed;
-        top: -3rem;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 5;
-        width: 3rem;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        border: 2px solid colors.$dark-grey;
-        font-size: 1.4rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: top 200ms;
-        &:active {
-            transform: translateX(-50%) scale(0.98);
-        }
-    }
     &__page-title {
         color: colors.$darker-blue;
         font-size: 2rem;
-        transition: color 200ms ease;
+        transition: color 200ms;
         &:hover {
             color: colors.$white;
         }
-    }
-    &__quiz-type {
-        font-weight: 500;
     }
     &__change-quiz-btn {
         text-decoration: none;
         border: none;
         background-color: colors.$nav-btn;
         color: colors.$white;
-        font-family: Poppins, sans-serif;
+        font-family: 'Poppins', sans-serif;
         padding: 0.4rem 1rem;
         border-radius: 0.3rem;
         border: 2px solid colors.$white;
@@ -61,5 +37,26 @@
         &:active {
             transform: scale(0.98);
         }
+    }
+}
+
+.reject-from-choosing-quiz-btn {
+    position: fixed;
+    top: -3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    width: 3rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid colors.$dark-grey;
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: top 200ms;
+    &:active {
+        transform: translateX(-50%) scale(0.98);
     }
 }

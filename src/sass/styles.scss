@@ -18,11 +18,11 @@ html {
 
 body {
     background-color: colors.$bg;
-    font-family: Poppins, sans-serif;
+    font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
     &.not-interactive {
-        .nav__back-from-quizes {
+        .reject-from-choosing-quiz-btn {
             top: 1rem;
         }
         .available-quizzes-grid .quiz-figure {

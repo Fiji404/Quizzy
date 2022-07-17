@@ -517,25 +517,26 @@ const questionsNumberPreference = document.querySelector(".number-of-questions")
 const applyChangesBtn = document.querySelector(".quiz-settings_apply-changes-btn");
 const fetchUserPreferences = ()=>{
     const localStorageValues = Object.values(localStorage);
-    questionsNumberPreference.textContent = localStorage.getItem("option0");
+    questionsNumberPreference.textContent = localStorage.getItem("Option 1");
     preferencesOptions.forEach((el)=>{
         localStorageValues.forEach((value)=>{
-            if (value === "option0") questionsNumberPreference.textContent = value;
             if (el.textContent === value) el.classList.add("active");
         });
     });
 };
 preferencesOptionList.forEach((listNode, idx)=>{
     listNode.addEventListener("click", ({ target  })=>{
-        const childActiveClassElements = listNode.querySelectorAll(".active");
-        childActiveClassElements.forEach((el)=>el.classList.remove("active"));
-        target.classList.add("active");
-        localStorage.setItem("option" + idx, target.textContent);
-        applyChangesBtn.classList.add("active");
+        if (target.classList.contains("settings-options-list__item")) {
+            listNode.querySelectorAll(".active").forEach((el)=>el.classList.remove("active"));
+            target.classList.add("active");
+            applyChangesBtn.classList.add("active");
+            localStorage.setItem("Option " + (idx + 1), target.textContent);
+        }
     });
 });
 applyChangesBtn.addEventListener("click", ()=>{
     applyChangesBtn.classList.remove("active");
+    window.location.reload();
     fetchUserPreferences();
 });
 quizSettingsCollapseChoicesBtn.forEach((el)=>{

@@ -12,7 +12,6 @@
     box-sizing: border-box;
 }
 
-
 body {
     background-color: colors.$bg;
     font-family: 'Poppins', sans-serif;
@@ -89,17 +88,30 @@ body {
 }
 
 .quiz-interface {
-    width: min(90%, 600px);
+    width: min(95%, 600px);
     border: 2px solid darken(colors.$white, 40);
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 2rem 1rem;
     margin-inline: auto;
     margin-top: 2rem;
     border-radius: 0.4rem;
     background-color: colors.$dark-grey;
     transition: 200ms ease;
     position: relative;
+    overflow: hidden;
+    &__time {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        background-color: colors.$green;
+        padding: 0.1rem 0;
+        &.less {
+            background-color: colors.$transparent-red;
+        }
+    }
     &__flag-img {
-        display: block; 
+        display: block;
         width: min(95%, 600px);
         max-height: 300px;
         margin-inline: auto;
@@ -157,7 +169,7 @@ body {
         margin-bottom: 0.7rem;
         output {
             display: inline-block;
-            padding: .05rem .5rem;
+            padding: 0.05rem 0.5rem;
             background-color: colors.$nav;
             border-radius: 0.2rem;
             border: 2px solid darken(colors.$white, 30);
@@ -178,6 +190,10 @@ body {
         cursor: pointer;
         border: 2px solid darken(colors.$white, 20);
         transition: background-color 200ms;
+        &[disabled] {
+            cursor: not-allowed;
+            background-color: darken(colors.$nav, 10);
+        }
         &:hover {
             background-color: lighten(colors.$nav, 10);
         }
@@ -197,6 +213,26 @@ body {
         display: flex;
         align-items: center;
         gap: 15px;
+        padding: 0.4rem 0.5rem;
+        border-radius: 0.4rem;
+        transition: background-color 200ms;
+        &:hover {
+            background-color: lighten(colors.$nav, 10);
+        }
+        &_correct {
+            background-color: colors.$light-green;
+        }
+        &_bad {
+            background-color: darken(colors.$transparent-red, 40);
+        }
+        &_checked {
+            animation: blinkingAnswer 600ms ease infinite alternate;
+        }
+        @keyframes blinkingAnswer {
+            to {
+                background-color: lighten(colors.$nav, 10);
+            }
+        }
     }
     &__input {
         appearance: none;
@@ -218,7 +254,6 @@ body {
         transition: color 200ms ease;
         color: darken(colors.$blue-clr, 15);
         font-size: 1.2rem;
-        text-align: center;
     }
 }
 
@@ -262,7 +297,7 @@ body {
                 color: colors.$transparent-red;
             }
             &_good {
-                color: colors.$green
+                color: colors.$green;
             }
         }
         &__view-answer-btn {

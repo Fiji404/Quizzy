@@ -533,13 +533,20 @@ const quizStatisticsCorrectAnswers = document.querySelector(".quiz-statistics__o
 const quizStatisticsBadAnswers = document.querySelector(".quiz-statistics__output_badly");
 const questionsNumberPreference = document.querySelector(".number-of-questions");
 const resultInfoTitle = document.querySelector(".quiz-statistics__result-info");
+const inputAnswerElements = [
+    ...document.querySelectorAll(".answers-list__input")
+];
 let currentQuestionNumber = 1;
-let correctAnswersCounter = 0;
-let badAnswersCounter = 0;
+const userPoints = {
+    correctAnswers: 0,
+    incorrectAnswers: 0
+};
 let randomQuestionId = 0;
 const queriedQuestionsArray = [];
 const quizName = document.body.dataset.quizName;
 const fetchRandomQuestionFromDB = ()=>{
+    for (const el of inputAnswerElements)el.disabled = false;
+    nextQuestionBtn.disabled = false;
     const questionsAmount = questionsNumberPreference.textContent.length === 11 ? questionsNumberPreference.textContent.slice(0, 1) : questionsNumberPreference.textContent.slice(0, 2);
     if (!(currentQuestionNumber === Number(questionsAmount) + 1)) {
         quizInterface.classList.add("active");
@@ -573,16 +580,35 @@ const validateAnswerFromUser = ()=>{
     if (currentQuestionNumber === Number(questionsAmount)) nextQuestionBtn.textContent = "Finish quiz";
     inputAnswersElements.forEach((el)=>{
         let nextSiblingLabelElementOfInput;
-        if (el.checked) nextSiblingLabelElementOfInput = el.nextElementSibling.textContent;
+        const elCheckedParent = el.closest(".answers-list__item");
+        if (el.checked) {
+            nextSiblingLabelElementOfInput = el.nextElementSibling.textContent;
+            elCheckedParent.classList.add("answers-list__item_checked");
+        }
         (0, _database.get)((0, _database.child)(dbRef, `Quizes/${quizName}/correctAnswers/Question${randomQuestionId}Answer`)).then((snapshot)=>{
             if (snapshot.exists()) {
                 if (snapshot.val() === nextSiblingLabelElementOfInput) {
-                    correctAnswersCounter++;
-                    console.log("Correct:", correctAnswersCounter);
+                    userPoints.correctAnswers++;
+                    setTimeout(()=>{
+                        elCheckedParent.classList.replace("answers-list__item_checked", "answers-list__item_correct");
+                        currentQuestionNumber++;
+                    }, 1500);
+                    setTimeout(()=>{
+                        elCheckedParent.classList.remove("answers-list__item_correct");
+                    }, 2500);
                 } else if (nextSiblingLabelElementOfInput !== snapshot.val() && el.checked) {
-                    badAnswersCounter++;
-                    console.log("Bad:", badAnswersCounter);
+                    userPoints.incorrectAnswers++;
+                    setTimeout(()=>{
+                        elCheckedParent.classList.replace("answers-list__item_checked", "answers-list__item_bad");
+                        currentQuestionNumber++;
+                    }, 1500);
+                    setTimeout(()=>{
+                        elCheckedParent.classList.remove("answers-list__item_bad");
+                    }, 2500);
                 }
+                setTimeout(()=>{
+                    quizInterface.classList.add("active");
+                }, 2700);
                 el.checked = false;
             }
         });
@@ -592,12 +618,12 @@ const validateAnswerFromUser = ()=>{
 const handleFinalPlayerScores = ()=>{
     quizInterface.classList.remove("active");
     quizStatisticsDashboard.classList.add("active");
-    quizStatisticsCorrectAnswers.textContent = correctAnswersCounter;
-    quizStatisticsBadAnswers.textContent = badAnswersCounter;
-    if (correctAnswersCounter > badAnswersCounter) {
+    quizStatisticsCorrectAnswers.textContent = userPoints.correctAnswers;
+    quizStatisticsBadAnswers.textContent = userPoints.incorrectAnswers;
+    if (userPoints.correctAnswers > userPoints.incorrectAnswers) {
         resultInfoTitle.classList.add("quiz-statistics__result-info_good");
         resultInfoTitle.textContent = "Congratulations, you have answered most of the questions correctly !";
-    } else if (correctAnswersCounter < badAnswersCounter) {
+    } else if (userPoints.correctAnswers < userPoints.incorrectAnswers) {
         resultInfoTitle.classList.add("quiz-statistics__result-info_bad");
         resultInfoTitle.textContent = "Please try again, your answers was incorrect.";
     }
@@ -607,10 +633,13 @@ nextQuestionBtn.addEventListener("click", ()=>{
     console.log("Current Question num:", currentQuestionNumber);
     const questionsAmount = questionsNumberPreference.textContent.length === 11 ? questionsNumberPreference.textContent.slice(0, 1) : questionsNumberPreference.textContent.slice(0, 2);
     if (isAnswerChecked) {
-        currentQuestionNumber++;
+        for (const el of inputAnswerElements)el.disabled = true;
+        nextQuestionBtn.disabled = true;
         currentQuestionElement.textContent = currentQuestionNumber;
         validateAnswerFromUser();
-        fetchRandomQuestionFromDB();
+        setTimeout(()=>{
+            fetchRandomQuestionFromDB();
+        }, 5000);
         incorrectAnswerNotyfication.textContent = "";
         incorrectAnswerNotyfication.classList.remove("active");
     } else if (!isAnswerChecked) {

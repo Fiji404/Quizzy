@@ -30,7 +30,8 @@
                     <p class="intro-section__desc">Click button below to begin</p>
                     <button class="intro-section__btn">Start quiz</button>
                 </header>
-                <section class="quiz-interface hidden">
+                <section data-time="moreThanHalf" class="quiz-interface">
+                    <!-- <output class="quiz-interface__time">Time: 00</output> -->
                     <header>
                         <p class="quiz-interface__question-number">Question <output>1</output> of <output class="number-of-questions">15 questions</output></p>
                         <h2 class="intro-section__title">What is this flag ?</h2>
@@ -47,7 +48,7 @@
                             <input class="answers-list__input" id="second-answer" name="quiz-answer" type="radio">
                             <label aria-label="Answer 2 to question" class="answers-list__label" for="second-answer"></label>
                         </li>
-                        <li class="answers-list__item">
+                        <li class="answers-list__item ">
                             <p class="answers-list__question-number">c:</p>
                             <input class="answers-list__input" id="third-answer" name="quiz-answer" type="radio">
                             <label aria-label="Answer 3 to question" class="answers-list__label" for="third-answer"></label>

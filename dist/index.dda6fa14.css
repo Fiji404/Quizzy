@@ -1,13 +1,12 @@
 @import "https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap";
 .nav {
-  color: #ebebeb;
   backdrop-filter: blur(5px);
   z-index: 1;
   background-color: #424242b7;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: 1.2rem;
   padding: 1rem 2rem;
   display: flex;
   position: sticky;
@@ -18,28 +17,6 @@
   text-decoration: none;
 }
 
-.nav__back-from-quizes {
-  z-index: 5;
-  width: 3rem;
-  aspect-ratio: 1;
-  cursor: pointer;
-  border: 2px solid #2c2c2c;
-  border-radius: 50%;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.4rem;
-  transition: top .2s;
-  display: flex;
-  position: fixed;
-  top: -3rem;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.nav__back-from-quizes:active {
-  transform: translateX(-50%)scale(.98);
-}
-
 .nav__page-title {
   color: #07f;
   font-size: 2rem;
@@ -48,10 +25,6 @@
 
 .nav__page-title:hover {
   color: #ebebeb;
-}
-
-.nav__quiz-type {
-  font-weight: 500;
 }
 
 .nav__change-quiz-btn {
@@ -69,6 +42,28 @@
 
 .nav__change-quiz-btn:active {
   transform: scale(.98);
+}
+
+.reject-from-choosing-quiz-btn {
+  z-index: 5;
+  width: 3rem;
+  aspect-ratio: 1;
+  cursor: pointer;
+  border: 2px solid #2c2c2c;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  transition: top .2s;
+  display: flex;
+  position: fixed;
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.reject-from-choosing-quiz-btn:active {
+  transform: translateX(-50%)scale(.98);
 }
 
 *, :before, :after {
@@ -102,7 +97,7 @@ body {
   overflow-x: hidden;
 }
 
-body.not-interactive .nav__back-from-quizes {
+body.not-interactive .reject-from-choosing-quiz-btn {
   top: 1rem;
 }
 
